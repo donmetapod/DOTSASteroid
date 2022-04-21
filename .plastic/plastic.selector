@@ -1,0 +1,4 @@
+repository "AsteroidsDOTS@local"
+  path "/"
+    br "/main"
+    co "/main"
