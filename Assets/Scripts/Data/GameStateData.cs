@@ -7,6 +7,7 @@ public class GameStateData : MonoBehaviour
     private int score;
     private int playerLives = 3;
     public bool spaceshipHasShield;
+    public bool spreadShotIsEnabled;
     public static GameStateData Instance;
     public UnityEvent OnScoreChanged;
 
@@ -37,6 +38,12 @@ public class GameStateData : MonoBehaviour
     {
         get => spaceshipHasShield;
         set => spaceshipHasShield = value;
+    }
+
+    public bool SpreadShotIsEnabled
+    {
+        get => spreadShotIsEnabled;
+        set => spreadShotIsEnabled = value;
     }
     private void Awake()
     {

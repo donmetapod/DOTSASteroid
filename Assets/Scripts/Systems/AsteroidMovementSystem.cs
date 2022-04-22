@@ -10,7 +10,7 @@ public partial class AsteroidMovementSystem : SystemBase
     {
         float deltaTime = Time.DeltaTime;
         Translation shipCurrentPosition = new Translation();
-        
+        float3 previousPosition;
         Entities.
             ForEach((in Translation position, in SpaceshipData ship) =>
             {
@@ -22,8 +22,9 @@ public partial class AsteroidMovementSystem : SystemBase
             // Sets MoveDirection to all asteroids
             if (asteroidData.MoveDirection.Equals(float3.zero))
             {
-                float3 targetOffset = new float3(Random.Range(-5, 5), Random.Range(-5, 5), 0);
-                shipCurrentPosition.Value += targetOffset;
+                float3 randomTargetOffset = new float3(Random.Range(-asteroidData.TargetOffset, asteroidData.TargetOffset),
+                    Random.Range(-asteroidData.TargetOffset, asteroidData.TargetOffset), 0);
+                shipCurrentPosition.Value += randomTargetOffset;
                 asteroidData.MoveDirection = shipCurrentPosition.Value - translation.Value;
             }
             

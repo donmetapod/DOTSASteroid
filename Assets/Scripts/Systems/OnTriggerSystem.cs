@@ -12,7 +12,7 @@ public partial class OnTriggerSystem : SystemBase
 {
     private BuildPhysicsWorld buildPhysicsWorld;
     private StepPhysicsWorld stepPhysicsWorld;
-    public static ComponentDataFromEntity<PowerUpTag> allPowerUps;
+    public static ComponentDataFromEntity<PowerUpData> allPowerUps;
     public static ComponentDataFromEntity<PlayerTag> allPlayers;
     public static ComponentDataFromEntity<AsteroidData> allAsteroids;
     public static ComponentDataFromEntity<BulletData> allBullets;
@@ -42,11 +42,12 @@ public partial class OnTriggerSystem : SystemBase
             Entity entityB = triggerEvent.EntityB;
             EntityCommandBuffer entityCommandBuffer = GameStateSystem.commandBufferSystem.CreateCommandBuffer();
             
-            if (allAsteroids.HasComponent(entityA) && allAsteroids.HasComponent(entityB))
-            {
-                return;
-            }
+            // if (allAsteroids.HasComponent(entityA) && allAsteroids.HasComponent(entityB))
+            // {
+            //     return;
+            // }
 
+            #region Bullets and Asteroids triggers
             // Bullet entity A collides with asteroid Entity B
             if (allBullets.HasComponent(entityA) && allAsteroids.HasComponent(entityB))
             {
@@ -55,10 +56,9 @@ public partial class OnTriggerSystem : SystemBase
             {
                 KillEntity(entityCommandBuffer, entityB, entityA);
             }
-            // if (allAsteroids.HasComponent(entityA) && allPlayers.HasComponent(entityB))
-            // {
-            //     
-            // }else 
+            #endregion
+
+            #region Player and Asteroids triggers
             if (allPlayers.HasComponent(entityA) && allAsteroids.HasComponent(entityB))
             {
                 // Destroy Player when touched by asteroid and shield is not active
@@ -72,6 +72,20 @@ public partial class OnTriggerSystem : SystemBase
                     GameStateData.Instance.SpaceshipHasShield = false;
                 }
             }
+            #endregion
+
+            #region Player and PowerUps triggers
+
+            if (allPowerUps.HasComponent(entityA) && allPlayers.HasComponent(entityB))
+            {
+                // Get power up type
+                if (allPowerUps[entityA].PowerUpType == PowerUpData.PowerUpTypeEnum.Shield)
+                {
+                    GameStateData.Instance.SpaceshipHasShield = true;
+                }
+                entityCommandBuffer.DestroyEntity(entityA);
+            }
+            #endregion
         }
 
         private static void KillEntity(EntityCommandBuffer entityCommandBuffer, Entity attackerEntity, Entity damagedEntity)
@@ -113,7 +127,7 @@ public partial class OnTriggerSystem : SystemBase
    
     protected override void OnUpdate()
     {
-        allPowerUps = GetComponentDataFromEntity<PowerUpTag>(true);
+        allPowerUps = GetComponentDataFromEntity<PowerUpData>(true);
         allPlayers = GetComponentDataFromEntity<PlayerTag>(true);
         allAsteroids = GetComponentDataFromEntity<AsteroidData>();
         allBullets = GetComponentDataFromEntity<BulletData>(true);
@@ -165,16 +179,16 @@ public partial class OnTriggerSystem : SystemBase
                 RigidBody nonTriggerBody = physicsWorld.Bodies[nonTriggerBodyIndex];
                 RigidBody triggerBody = physicsWorld.Bodies[triggerBodyIndex];
     
-                bool isTrigger = false;
-                unsafe
-                {
-                    ConvexCollider* colliderPtr = (ConvexCollider*)triggerBody.Collider.GetUnsafePtr();
-                    var material = colliderPtr->Material;
-    
-                    isTrigger = colliderPtr->Material.CollisionResponse == CollisionResponsePolicy.RaiseTriggerEvents;
-                }
-
-                float distance = math.distance(triggerBody.WorldFromBody.pos, nonTriggerBody.WorldFromBody.pos);
+                // bool isTrigger = false;
+                // unsafe
+                // {
+                //     ConvexCollider* colliderPtr = (ConvexCollider*)triggerBody.Collider.GetUnsafePtr();
+                //     var material = colliderPtr->Material;
+                //
+                //     isTrigger = colliderPtr->Material.CollisionResponse == CollisionResponsePolicy.RaiseTriggerEvents;
+                // }
+                //
+                // float distance = math.distance(triggerBody.WorldFromBody.pos, nonTriggerBody.WorldFromBody.pos);
                 
             }).Run();
 
