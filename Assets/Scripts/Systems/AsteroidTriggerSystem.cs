@@ -8,7 +8,6 @@ using Unity.Physics.Systems;
 using UnityEngine;
 using FixedStepSimulationSystemGroup = Unity.Entities.FixedStepSimulationSystemGroup;
 
-// System
 [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
 [UpdateAfter(typeof(ExportPhysicsWorld))]
 [UpdateBefore(typeof(EndFramePhysicsSystem))]
@@ -32,9 +31,7 @@ public partial class AsteroidTriggerReaction : SystemBase
         {
             Entity entityA = triggerEvent.EntityA;
             Entity entityB = triggerEvent.EntityB;
-            
-            // Debug.Log("trigger event");
-            
+
             bool isEntityADynamic = PhysiscsVelocityGroup.HasComponent(entityA);
             bool isEntityBDynamic = PhysiscsVelocityGroup.HasComponent(entityB);
             if (!isEntityADynamic && !isEntityBDynamic)
@@ -45,12 +42,6 @@ public partial class AsteroidTriggerReaction : SystemBase
             EntityManager entityManager = new EntityManager();
             if(entityA != null)
                 entityManager.DestroyEntity(entityA);
-            // entityManager.DestroyEntity(entityB);
-            // var triggerComponent = AsteroidGroup[entityA];
-            // {
-            //     var component = PhysiscsVelocityGroup[entityA];
-            //     component.
-            // }
 
         }
     }
@@ -70,7 +61,7 @@ public partial class AsteroidTriggerReaction : SystemBase
                 typeof(AsteroidTrigger)
             }
         });
-        // Debug.Log(_entityQuery.CalculateEntityCount());
+        
         if (_entityQuery.CalculateEntityCount() == 0)
         {
             return;

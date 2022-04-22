@@ -1,19 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Unity.Entities;
 
 public class UIController : MonoBehaviour
 {
-    
-    void Start()
+
+    [SerializeField] private TMP_Text scoreUIText;
+
+    private void Start()
     {
-        // World.DefaultGameObjectInjectionWorld.GetExistingSystem<OnTriggerSystem>().OnScoreIncreased 
+        GameStateData.Instance.OnScoreChanged.AddListener(UpdateScore);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        GameStateData.Instance.OnScoreChanged.RemoveListener(UpdateScore);
     }
+
+    void UpdateScore()
+    {
+        scoreUIText.text = "Score : " + GameStateData.Instance.Score;  
+    }
+
 }

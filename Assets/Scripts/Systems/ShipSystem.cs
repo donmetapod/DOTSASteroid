@@ -9,6 +9,7 @@ using Unity.Transforms;
 using UnityEngine;
 using Unity.Physics;
 using Unity.Physics.Extensions;
+using Unity.Rendering;
 
 [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
 public partial class ShipSystem : SystemBase
@@ -46,9 +47,26 @@ public partial class ShipSystem : SystemBase
                     var forceVector = localToWorld.Up * ship.MovementForce * deltaTime;
                     physicsVelocity.ApplyLinearImpulse(physicsMass, forceVector);
                 }
-                
+                // ship.Shield.SetActive(false);
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    GameStateData.SpaceshipHasShield = true;
+                }
 
-            }).WithoutBurst().Run();
+                if (GameStateData.SpaceshipHasShield)
+                {
+                    // var shieldMesh = EntityManager.GetSharedComponentData<RenderMesh>(ship.Shield);
+                    // shieldMesh.material.color = new Color(.5f, .5f, .5f, .5f);
+                    EntityManager.SetEnabled(ship.Shield, true);
+                }
+                else
+                {
+                    // var shieldMesh = EntityManager.GetSharedComponentData<RenderMesh>(ship.Shield);
+                    // shieldMesh.material.color = new Color(.5f, .5f, .5f, 0);
+                    EntityManager.SetEnabled(ship.Shield, false);
+                }
+
+            }).WithStructuralChanges().WithoutBurst().Run();
         
         
         Entities.ForEach((Entity entity,ref BulletData bulletData) =>
@@ -59,6 +77,7 @@ public partial class ShipSystem : SystemBase
                 bulletData.AddedToPool = true;
             }
         }).WithoutBurst().Run();
+        
         
         // Shoot bullet from pool
         if (Input.GetMouseButtonDown(0))

@@ -16,15 +16,14 @@ public partial class OnTriggerSystem : SystemBase
     public static ComponentDataFromEntity<PlayerTag> allPlayers;
     public static ComponentDataFromEntity<AsteroidData> allAsteroids;
     public static ComponentDataFromEntity<BulletData> allBullets;
-    public static EndSimulationEntityCommandBufferSystem commandBufferSystem;
-
+    
     private EntityQuery entityQuery;
     
     protected override void OnCreate()
     {
         buildPhysicsWorld = World.GetOrCreateSystem<BuildPhysicsWorld>();
         stepPhysicsWorld = World.GetOrCreateSystem<StepPhysicsWorld>();
-        commandBufferSystem = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
+        
         
         entityQuery = GetEntityQuery(new EntityQueryDesc
         {
@@ -41,7 +40,7 @@ public partial class OnTriggerSystem : SystemBase
             triggerEvents.Add(triggerEvent);
             Entity entityA = triggerEvent.EntityA;
             Entity entityB = triggerEvent.EntityB;
-            EntityCommandBuffer entityCommandBuffer = commandBufferSystem.CreateCommandBuffer();
+            EntityCommandBuffer entityCommandBuffer = GameStateSystem.commandBufferSystem.CreateCommandBuffer();
             
             if (allAsteroids.HasComponent(entityA) && allAsteroids.HasComponent(entityB))
             {
@@ -75,7 +74,7 @@ public partial class OnTriggerSystem : SystemBase
                    
                 }
                 entityCommandBuffer.DestroyEntity(entityB);
-                // destroyedAsteroidData.MarkedForDestroy = true;
+                GameStateData.Instance.Score++;
             }else if (allAsteroids.HasComponent(entityA) && allBullets.HasComponent(entityB)) // Bullet entity B collides with asteroid Entity A
             {
                 entityCommandBuffer.DestroyEntity(entityA);
@@ -103,16 +102,25 @@ public partial class OnTriggerSystem : SystemBase
                    
                 }
                 entityCommandBuffer.DestroyEntity(entityB);
-                // destroyedAsteroidData.MarkedForDestroy = true;
+                GameStateData.Instance.Score++;
             }
 
             if (allAsteroids.HasComponent(entityA) && allPlayers.HasComponent(entityB))
             {
-                // Debug.Log("Power up Entity A: " + entityA + " Collided with Player Entity B: " + entityB);
+                
             }else if (allPlayers.HasComponent(entityA) && allAsteroids.HasComponent(entityB))
             {
                 // Destroy Player when touched by asteroid
-                entityCommandBuffer.DestroyEntity(entityA);
+                if (!GameStateData.SpaceshipHasShield)
+                {
+                    entityCommandBuffer.DestroyEntity(entityA);
+                }
+                else
+                {
+                    entityCommandBuffer.DestroyEntity(entityB);
+                    GameStateData.SpaceshipHasShield = false;
+                }
+
             }
         }
     }
