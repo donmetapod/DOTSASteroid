@@ -48,24 +48,14 @@ public partial class ShipSystem : SystemBase
                     physicsVelocity.ApplyLinearImpulse(physicsMass, forceVector);
                 }
                 // ship.Shield.SetActive(false);
-                if (Input.GetKey(KeyCode.Space))
+                if (Input.GetKey(KeyCode.Space)) // TODO do this with power up
                 {
-                    GameStateData.SpaceshipHasShield = true;
+                    GameStateData.Instance.SpaceshipHasShield = true;
                 }
 
-                if (GameStateData.SpaceshipHasShield)
-                {
-                    // var shieldMesh = EntityManager.GetSharedComponentData<RenderMesh>(ship.Shield);
-                    // shieldMesh.material.color = new Color(.5f, .5f, .5f, .5f);
-                    EntityManager.SetEnabled(ship.Shield, true);
-                }
-                else
-                {
-                    // var shieldMesh = EntityManager.GetSharedComponentData<RenderMesh>(ship.Shield);
-                    // shieldMesh.material.color = new Color(.5f, .5f, .5f, 0);
-                    EntityManager.SetEnabled(ship.Shield, false);
-                }
-
+                // Enable or disable shield
+                EntityManager.SetEnabled(ship.Shield, GameStateData.Instance.SpaceshipHasShield);
+                
             }).WithStructuralChanges().WithoutBurst().Run();
         
         

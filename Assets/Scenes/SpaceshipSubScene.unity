@@ -178,6 +178,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1420286154916261659, guid: 1d2d38b9e3e25114fba97ec232d98812, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420286154916261659, guid: 1d2d38b9e3e25114fba97ec232d98812, type: 3}
+      propertyPath: m_LinearDamping
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6479796842479683866, guid: 1d2d38b9e3e25114fba97ec232d98812, type: 3}
       propertyPath: m_LocalScale.x
       value: 3.5

@@ -4,8 +4,9 @@ using UnityEngine.Events;
 
 public class GameStateData : MonoBehaviour
 {
-    private int score; 
-    public static bool SpaceshipHasShield;
+    private int score;
+    private int playerLives = 3;
+    public bool spaceshipHasShield;
     public static GameStateData Instance;
     public UnityEvent OnScoreChanged;
 
@@ -17,7 +18,25 @@ public class GameStateData : MonoBehaviour
             score = value;
             OnScoreChanged?.Invoke();
         }
-        
+    }
+
+    public int PlayerLives
+    {
+        get => playerLives;
+        set
+        {
+            playerLives = value;
+            if (value == 0)
+            {
+                //Game Over
+            }
+        }
+    }
+
+    public bool SpaceshipHasShield
+    {
+        get => spaceshipHasShield;
+        set => spaceshipHasShield = value;
     }
     private void Awake()
     {

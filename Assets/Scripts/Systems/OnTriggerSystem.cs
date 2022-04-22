@@ -50,78 +50,57 @@ public partial class OnTriggerSystem : SystemBase
             // Bullet entity A collides with asteroid Entity B
             if (allBullets.HasComponent(entityA) && allAsteroids.HasComponent(entityB))
             {
-                BulletData inactiveBullet = new BulletData
-                {
-                    IsActive = false,
-                    Speed = 0
-                };
-                entityCommandBuffer.SetComponent(entityA, inactiveBullet);
-                Translation defaultBulletTranslation = new Translation();
-                defaultBulletTranslation.Value = new float3(100, 100, 100);
-                entityCommandBuffer.SetComponent(entityA, defaultBulletTranslation);
-
-                AsteroidData destroyedAsteroidData = allAsteroids[entityB];
-                if (!destroyedAsteroidData.IsSmallAsteroid)
-                {
-                    for (int i = 0; i < 2; i++)// Create two small asteroids when a big one is destroyed
-                    {
-                        Entity smallAsteroidClone = entityCommandBuffer.Instantiate(destroyedAsteroidData.SmallerAsteroid);
-                        Translation smallAsteroidTranslation = destroyedAsteroidData.LastKnownTranslation;
-                        smallAsteroidTranslation.Value.x += i;
-                        smallAsteroidTranslation.Value.y += i;
-                        entityCommandBuffer.SetComponent(smallAsteroidClone, smallAsteroidTranslation);
-                    }
-                   
-                }
-                entityCommandBuffer.DestroyEntity(entityB);
-                GameStateData.Instance.Score++;
+                KillEntity(entityCommandBuffer, entityA, entityB);
             }else if (allAsteroids.HasComponent(entityA) && allBullets.HasComponent(entityB)) // Bullet entity B collides with asteroid Entity A
             {
-                entityCommandBuffer.DestroyEntity(entityA);
-                BulletData inactiveBullet = new BulletData
-                {
-                    IsActive = false,
-                    Speed = 0
-                };
-                entityCommandBuffer.SetComponent(entityB, inactiveBullet);
-                Translation defaultBulletTranslation = new Translation();
-                defaultBulletTranslation.Value = new float3(100, 100, 100);
-                entityCommandBuffer.SetComponent(entityB, defaultBulletTranslation);
-                
-                AsteroidData destroyedAsteroidData = allAsteroids[entityB];
-                if (!destroyedAsteroidData.IsSmallAsteroid)
-                {
-                    for (int i = 0; i < 2; i++)// Create two small asteroids when a big one is destroyed
-                    {
-                        Entity smallAsteroidClone = entityCommandBuffer.Instantiate(destroyedAsteroidData.SmallerAsteroid);
-                        Translation smallAsteroidTranslation = destroyedAsteroidData.LastKnownTranslation;
-                        smallAsteroidTranslation.Value.x += i;
-                        smallAsteroidTranslation.Value.y += i;
-                        entityCommandBuffer.SetComponent(smallAsteroidClone, smallAsteroidTranslation);
-                    }
-                   
-                }
-                entityCommandBuffer.DestroyEntity(entityB);
-                GameStateData.Instance.Score++;
+                KillEntity(entityCommandBuffer, entityB, entityA);
             }
-
-            if (allAsteroids.HasComponent(entityA) && allPlayers.HasComponent(entityB))
+            // if (allAsteroids.HasComponent(entityA) && allPlayers.HasComponent(entityB))
+            // {
+            //     
+            // }else 
+            if (allPlayers.HasComponent(entityA) && allAsteroids.HasComponent(entityB))
             {
-                
-            }else if (allPlayers.HasComponent(entityA) && allAsteroids.HasComponent(entityB))
-            {
-                // Destroy Player when touched by asteroid
-                if (!GameStateData.SpaceshipHasShield)
+                // Destroy Player when touched by asteroid and shield is not active
+                if (!GameStateData.Instance.SpaceshipHasShield)
                 {
                     entityCommandBuffer.DestroyEntity(entityA);
                 }
                 else
                 {
                     entityCommandBuffer.DestroyEntity(entityB);
-                    GameStateData.SpaceshipHasShield = false;
+                    GameStateData.Instance.SpaceshipHasShield = false;
                 }
-
             }
+        }
+
+        private static void KillEntity(EntityCommandBuffer entityCommandBuffer, Entity attackerEntity, Entity damagedEntity)
+        {
+            BulletData inactiveBullet = new BulletData
+            {
+                IsActive = false,
+                Speed = 0
+            };
+            entityCommandBuffer.SetComponent(attackerEntity, inactiveBullet);
+            Translation defaultBulletTranslation = new Translation();
+            defaultBulletTranslation.Value = new float3(100, 100, 100);
+            entityCommandBuffer.SetComponent(attackerEntity, defaultBulletTranslation);
+
+            AsteroidData destroyedAsteroidData = allAsteroids[damagedEntity];
+            if (!destroyedAsteroidData.IsSmallAsteroid)
+            {
+                // Create two small asteroids when a big one is destroyed
+                for (int i = 0; i < 2; i++) 
+                {
+                    Entity smallAsteroidClone = entityCommandBuffer.Instantiate(destroyedAsteroidData.SmallerAsteroid);
+                    Translation smallAsteroidTranslation = destroyedAsteroidData.LastKnownTranslation;
+                    smallAsteroidTranslation.Value.x += i;
+                    smallAsteroidTranslation.Value.y += i;
+                    entityCommandBuffer.SetComponent(smallAsteroidClone, smallAsteroidTranslation);
+                }
+            }
+            entityCommandBuffer.DestroyEntity(damagedEntity);
+            GameStateData.Instance.Score++;
         }
     }
 
