@@ -75,6 +75,7 @@ public partial class OnTriggerSystem : SystemBase
                    
                 }
                 entityCommandBuffer.DestroyEntity(entityB);
+                // destroyedAsteroidData.MarkedForDestroy = true;
             }else if (allAsteroids.HasComponent(entityA) && allBullets.HasComponent(entityB)) // Bullet entity B collides with asteroid Entity A
             {
                 entityCommandBuffer.DestroyEntity(entityA);
@@ -87,6 +88,22 @@ public partial class OnTriggerSystem : SystemBase
                 Translation defaultBulletTranslation = new Translation();
                 defaultBulletTranslation.Value = new float3(100, 100, 100);
                 entityCommandBuffer.SetComponent(entityB, defaultBulletTranslation);
+                
+                AsteroidData destroyedAsteroidData = allAsteroids[entityB];
+                if (!destroyedAsteroidData.IsSmallAsteroid)
+                {
+                    for (int i = 0; i < 2; i++)// Create two small asteroids when a big one is destroyed
+                    {
+                        Entity smallAsteroidClone = entityCommandBuffer.Instantiate(destroyedAsteroidData.SmallerAsteroid);
+                        Translation smallAsteroidTranslation = destroyedAsteroidData.LastKnownTranslation;
+                        smallAsteroidTranslation.Value.x += i;
+                        smallAsteroidTranslation.Value.y += i;
+                        entityCommandBuffer.SetComponent(smallAsteroidClone, smallAsteroidTranslation);
+                    }
+                   
+                }
+                entityCommandBuffer.DestroyEntity(entityB);
+                // destroyedAsteroidData.MarkedForDestroy = true;
             }
 
             if (allAsteroids.HasComponent(entityA) && allPlayers.HasComponent(entityB))
@@ -111,7 +128,7 @@ public partial class OnTriggerSystem : SystemBase
     {
         allPowerUps = GetComponentDataFromEntity<PowerUpTag>(true);
         allPlayers = GetComponentDataFromEntity<PlayerTag>(true);
-        allAsteroids = GetComponentDataFromEntity<AsteroidData>(true);
+        allAsteroids = GetComponentDataFromEntity<AsteroidData>();
         allBullets = GetComponentDataFromEntity<BulletData>(true);
         
         Dependency.Complete();

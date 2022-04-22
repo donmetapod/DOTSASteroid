@@ -23,7 +23,7 @@ public class AsteroidSpawnerMono : MonoBehaviour
         {
             EntityCommandBuffer entityCommandBuffer = OnTriggerSystem.commandBufferSystem.CreateCommandBuffer();
             Entity asteroidEntity = entityCommandBuffer.Instantiate(GameObjectConversionUtility.ConvertGameObjectHierarchy(Prefab, settings));//entityManager.Instantiate(prefab);
-            Vector2 spawnArea = new Vector2(Random.Range(15, 18), Random.Range(15, 18));
+            Vector2 spawnArea = new Vector2(Random.Range(20, 25), Random.Range(20, 25));
             int swapXPossibility = Random.Range(1, 100);
             if (swapXPossibility < 50) { spawnArea.x *= -1; }
             int swapYPossibility = Random.Range(1, 100);

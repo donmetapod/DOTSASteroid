@@ -134,9 +134,7 @@ MonoBehaviour:
     y: 0
     z: 0
   MovementForce: 10
-  Speed: 5
   TurnSpeed: 3
-  bulletPrefab: {fileID: 2556567723650956513, guid: b0db13b3514359b46aed8091837cd168, type: 3}
 --- !u!114 &1420286154916261649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,7 +391,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67991ef6f0943114dacd12219e70ac81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumExpectedEvents: 0
 --- !u!114 &-6028806668746986677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,5 +403,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c49e89c73d4e8f4448dcf1c1fd258a61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScreenXLimit: 18
-  ScreenYLimit: 14
+  ScreenXLimit: 25
+  ScreenYLimit: 24
