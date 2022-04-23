@@ -62,10 +62,13 @@ public partial class OnTriggerSystem : SystemBase
             if (allPlayers.HasComponent(entityA) && allAsteroids.HasComponent(entityB))
             {
                 
-                if (!GameStateData.Instance.SpaceshipHasShield && !GameStateData.Instance.PlayerRespawning)
+                if (!GameStateData.Instance.SpaceshipHasShield)
                 {
-                    GameStateData.Instance.PlayerRespawning = true;
-                    GameStateData.Instance.PlayerLives--;
+                    if (!GameStateData.Instance.PlayerRespawning)
+                    {
+                        GameStateData.Instance.PlayerRespawning = true;
+                        GameStateData.Instance.PlayerLives--;
+                    }
                     // Debug.Log("trigger with asteroid");
                     // entityCommandBuffer.DestroyEntity(entityB); EntityB is colliding asteroid 
                 }
