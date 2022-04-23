@@ -15,7 +15,8 @@ using Unity.Rendering;
 public partial class ShipSystem : SystemBase
 {
     private List<Entity> bulletPool = new List<Entity>();
-   
+    private float respawnTime = 1;
+    
     protected override void OnUpdate()
     {
         float deltaTime = Time.DeltaTime;
@@ -26,6 +27,21 @@ public partial class ShipSystem : SystemBase
                 ref PhysicsVelocity physicsVelocity, ref PhysicsMass physicsMass,
                 in LocalToWorld localToWorld, in InputData inputData) =>
             {
+                #region RespawnLogic
+                if (GameStateData.Instance.PlayerRespawning)
+                {
+                    respawnTime -= deltaTime;
+                    position.Value = new float3(-1000, -1000, -1000);
+                }else if (respawnTime <= 0)
+                {
+                    position.Value = float3.zero;
+                    rotation.Value = quaternion.identity;
+                    physicsVelocity.Linear = float3.zero;
+                    respawnTime = 1;
+                }
+                #endregion
+                
+
                 shipTranslation = position;
                 shipRotation = rotation;
                 
@@ -81,17 +97,16 @@ public partial class ShipSystem : SystemBase
             };
 
             int spreadShotCount = 0;
-            int[] spreadShotAngles = {-8, 8, 8 };
+            int[] spreadShotRotations = {-8, 8, 8 };// Rotations for each one of the spread shot bullets
             float zRotationOffset = -0.1f;
             for (int i = 0; i < bulletPool.Count; i++)
             {
-                if (GameStateData.Instance.spreadShotIsEnabled)
+                if (GameStateData.Instance.SpreadShotIsEnabled)
                 {
                     BulletData currentBulletData = allBulletData[bulletPool[i]];
                     if (!currentBulletData.IsActive)
                     {
-                        quaternion zRot = quaternion.RotateZ(spreadShotAngles[spreadShotCount] * Mathf.Deg2Rad);
-                        Debug.Log("spread shot " + spreadShotCount);
+                        quaternion zRot = quaternion.RotateZ(spreadShotRotations[spreadShotCount] * Mathf.Deg2Rad);
                         shipRotation.Value = math.mul(shipRotation.Value, zRot);
                         entityCommandBuffer.SetComponent(bulletPool[i], activeBullet);
                         entityCommandBuffer.SetComponent(bulletPool[i], shipTranslation);

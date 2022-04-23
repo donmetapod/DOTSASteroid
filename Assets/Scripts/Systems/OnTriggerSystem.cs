@@ -61,10 +61,13 @@ public partial class OnTriggerSystem : SystemBase
             #region Player and Asteroids triggers
             if (allPlayers.HasComponent(entityA) && allAsteroids.HasComponent(entityB))
             {
-                // Destroy Player when touched by asteroid and shield is not active
-                if (!GameStateData.Instance.SpaceshipHasShield)
+                
+                if (!GameStateData.Instance.SpaceshipHasShield && !GameStateData.Instance.PlayerRespawning)
                 {
-                    entityCommandBuffer.DestroyEntity(entityA);
+                    GameStateData.Instance.PlayerRespawning = true;
+                    GameStateData.Instance.PlayerLives--;
+                    // Debug.Log("trigger with asteroid");
+                    // entityCommandBuffer.DestroyEntity(entityB); EntityB is colliding asteroid 
                 }
                 else
                 {

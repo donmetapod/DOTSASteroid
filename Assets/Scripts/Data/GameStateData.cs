@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,11 +8,21 @@ public class GameStateData : MonoBehaviour
 {
     private int score;
     private int playerLives = 3;
-    public bool spaceshipHasShield;
-    public bool spreadShotIsEnabled;
+    private bool spaceshipHasShield;
+    private bool spreadShotIsEnabled;
+    private bool playerRespawning;
+    private bool startRespawnRoutine;
     public static GameStateData Instance;
-    public UnityEvent OnScoreChanged;
+    public event Action OnScoreChanged;
+    public event Action OnLiveLost;
+    public event Action OnGameOver;
+    public enum GameStateEnum
+    {
+        Playing,
+        GameOver
+    }
 
+    public GameStateEnum GameState;
     public int Score
     {
         get => score;
@@ -27,9 +39,11 @@ public class GameStateData : MonoBehaviour
         set
         {
             playerLives = value;
+            OnLiveLost?.Invoke();
             if (value == 0)
             {
-                //Game Over
+                OnGameOver?.Invoke();
+                GameState = GameStateEnum.GameOver;
             }
         }
     }
@@ -45,11 +59,38 @@ public class GameStateData : MonoBehaviour
         get => spreadShotIsEnabled;
         set => spreadShotIsEnabled = value;
     }
+
+    public bool PlayerRespawning
+    {
+        get => playerRespawning;
+        set
+        {
+            playerRespawning = value;
+            startRespawnRoutine = true;
+            Debug.Log("respawn");
+        }
+    }
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
         }
+    }
+
+    private void Update()
+    {
+        if (startRespawnRoutine)
+        {
+            startRespawnRoutine = false;
+            StartCoroutine(MakeVulnerableAfterRespawn());
+        }
+    }
+
+    IEnumerator MakeVulnerableAfterRespawn()
+    {
+        yield return new WaitForSeconds(1);
+        playerRespawning = false;
     }
 }
