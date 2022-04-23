@@ -743,6 +743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 765815460196260148, guid: 9dc85ecbb151d484a9c5102e58539314, type: 3}
+  initialSpawnDelay: 10
   instatiationDelay: 20
   spawnAreaCloseRange: 10
   spawnAreaFarRange: 10
@@ -790,6 +791,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 7503726799006242306, guid: 1f86f6b884802a2419de2ae3013956ad, type: 3}
+  initialSpawnDelay: 0
   instatiationDelay: 3
   spawnAreaCloseRange: 20
   spawnAreaFarRange: 25
@@ -837,6 +839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 765815460196260148, guid: 8a5a36e929875cf4584fe358e2c8d5d3, type: 3}
+  initialSpawnDelay: 0
   instatiationDelay: 40
   spawnAreaCloseRange: 10
   spawnAreaFarRange: 10

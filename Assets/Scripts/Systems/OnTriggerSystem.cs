@@ -83,6 +83,11 @@ public partial class OnTriggerSystem : SystemBase
                 {
                     GameStateData.Instance.SpaceshipHasShield = true;
                 }
+                else
+                {
+                    GameStateData.Instance.SpreadShotIsEnabled = true;
+                }
+
                 entityCommandBuffer.DestroyEntity(entityA);
             }
             #endregion

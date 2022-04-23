@@ -10,6 +10,7 @@ public struct SpaceshipData : IComponentData
     public float MovementForce;
     public float TurnSpeed;
     public Entity Shield;
+    public Entity SpreadShot;
 }
 
 

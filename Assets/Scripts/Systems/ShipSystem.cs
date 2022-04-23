@@ -47,14 +47,12 @@ public partial class ShipSystem : SystemBase
                     var forceVector = localToWorld.Up * ship.MovementForce * deltaTime;
                     physicsVelocity.ApplyLinearImpulse(physicsMass, forceVector);
                 }
-                // ship.Shield.SetActive(false);
-                if (Input.GetKey(KeyCode.Space)) // TODO do this with power up
-                {
-                    GameStateData.Instance.SpaceshipHasShield = true;
-                }
 
-                // Enable or disable shield
+                // Enable or disable shield object
                 EntityManager.SetEnabled(ship.Shield, GameStateData.Instance.SpaceshipHasShield);
+                
+                // Enable or disable spread shot object
+                EntityManager.SetEnabled(ship.SpreadShot, GameStateData.Instance.SpreadShotIsEnabled);
                 
             }).WithStructuralChanges().WithoutBurst().Run();
         
@@ -68,7 +66,7 @@ public partial class ShipSystem : SystemBase
             }
         }).WithoutBurst().Run();
         
-        
+
         // Shoot bullet from pool
         if (Input.GetMouseButtonDown(0))
         {
@@ -81,17 +79,39 @@ public partial class ShipSystem : SystemBase
                 IsActive = true,
                 Speed = 100
             };
-            
+
+            int spreadShotCount = 0;
+            int[] spreadShotAngles = {-8, 8, 8 };
+            float zRotationOffset = -0.1f;
             for (int i = 0; i < bulletPool.Count; i++)
             {
-                BulletData currentBulletData = allBulletData[bulletPool[i]];
-                if (!currentBulletData.IsActive)
+                if (GameStateData.Instance.spreadShotIsEnabled)
                 {
-                    entityCommandBuffer.SetComponent(bulletPool[i], activeBullet);
-                    entityCommandBuffer.SetComponent(bulletPool[i], shipTranslation);
-                    entityCommandBuffer.SetComponent(bulletPool[i], shipRotation);
-                    break;
-                } 
+                    BulletData currentBulletData = allBulletData[bulletPool[i]];
+                    if (!currentBulletData.IsActive)
+                    {
+                        quaternion zRot = quaternion.RotateZ(spreadShotAngles[spreadShotCount] * Mathf.Deg2Rad);
+                        Debug.Log("spread shot " + spreadShotCount);
+                        shipRotation.Value = math.mul(shipRotation.Value, zRot);
+                        entityCommandBuffer.SetComponent(bulletPool[i], activeBullet);
+                        entityCommandBuffer.SetComponent(bulletPool[i], shipTranslation);
+                        entityCommandBuffer.SetComponent(bulletPool[i], shipRotation);
+                        spreadShotCount++;
+                        if(spreadShotCount >= 3)
+                            break;
+                    }
+                }
+                else
+                {
+                    BulletData currentBulletData = allBulletData[bulletPool[i]];
+                    if (!currentBulletData.IsActive)
+                    {
+                        entityCommandBuffer.SetComponent(bulletPool[i], activeBullet);
+                        entityCommandBuffer.SetComponent(bulletPool[i], shipTranslation);
+                        entityCommandBuffer.SetComponent(bulletPool[i], shipRotation);
+                        break;
+                    } 
+                }
             }
         }
     }
