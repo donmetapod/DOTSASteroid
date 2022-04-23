@@ -39,7 +39,7 @@ public class UIController : MonoBehaviour
 
     public void ShowGameOverScreen()
     {
-        showGameOver = false;
+        showGameOver = true;
     }
 
     private void Update()
@@ -64,7 +64,6 @@ public class UIController : MonoBehaviour
                     lifeIcons[i].SetActive(false);
                 }
             }
-            // Debug.Log("Player remaining lives " + GameStateData.Instance.PlayerLives);
         }
 
         if (showGameOver)

@@ -15,10 +15,11 @@ using Unity.Rendering;
 public partial class ShipSystem : SystemBase
 {
     private List<Entity> bulletPool = new List<Entity>();
-    private float respawnTime = 1;
+    private float respawnTime = 2;
     
     protected override void OnUpdate()
     {
+        
         float deltaTime = Time.DeltaTime;
         Translation shipTranslation = new Translation();
         Rotation shipRotation = new Rotation();
@@ -41,7 +42,9 @@ public partial class ShipSystem : SystemBase
                 }
                 #endregion
                 
-
+                if(GameStateData.Instance.GameState == GameStateData.GameStateEnum.GameOver)
+                    return;
+                
                 shipTranslation = position;
                 shipRotation = rotation;
                 

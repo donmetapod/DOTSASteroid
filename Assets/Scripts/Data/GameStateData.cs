@@ -67,7 +67,6 @@ public class GameStateData : MonoBehaviour
         {
             playerRespawning = value;
             startRespawnRoutine = true;
-            Debug.Log("respawn");
         }
     }
 
@@ -90,7 +89,7 @@ public class GameStateData : MonoBehaviour
 
     IEnumerator MakeVulnerableAfterRespawn()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         playerRespawning = false;
     }
 }
