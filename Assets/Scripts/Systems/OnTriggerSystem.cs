@@ -16,6 +16,7 @@ public partial class OnTriggerSystem : SystemBase
     public static ComponentDataFromEntity<PlayerTag> allPlayers;
     public static ComponentDataFromEntity<AsteroidData> allAsteroids;
     public static ComponentDataFromEntity<BulletData> allBullets;
+    public static ComponentDataFromEntity<UFOData> allUFOs;
     
     private EntityQuery entityQuery;
     
@@ -42,11 +43,6 @@ public partial class OnTriggerSystem : SystemBase
             Entity entityB = triggerEvent.EntityB;
             EntityCommandBuffer entityCommandBuffer = GameStateSystem.commandBufferSystem.CreateCommandBuffer();
             
-            // if (allAsteroids.HasComponent(entityA) && allAsteroids.HasComponent(entityB))
-            // {
-            //     return;
-            // }
-
             #region Bullets and Asteroids triggers
             // Bullet entity A collides with asteroid Entity B
             if (allBullets.HasComponent(entityA) && allAsteroids.HasComponent(entityB))
@@ -97,6 +93,21 @@ public partial class OnTriggerSystem : SystemBase
                 entityCommandBuffer.DestroyEntity(entityA);
             }
             #endregion
+
+            #region Bullets and UFO
+
+            if (allPlayers.HasComponent(entityA) && allUFOs.HasComponent(entityB))
+            {
+                // var allUfO = allUFOs[entityB];
+                // allUfO.ShotByPlayer = true;
+            }
+            if (allUFOs.HasComponent(entityA) && allPlayers.HasComponent(entityB))
+            {
+                // var allUfO = allUFOs[entityB];
+                // allUfO.ShotByPlayer = true;
+            }
+
+            #endregion
         }
 
         private static void KillEntity(EntityCommandBuffer entityCommandBuffer, Entity attackerEntity, Entity damagedEntity)
@@ -142,6 +153,7 @@ public partial class OnTriggerSystem : SystemBase
         allPlayers = GetComponentDataFromEntity<PlayerTag>(true);
         allAsteroids = GetComponentDataFromEntity<AsteroidData>();
         allBullets = GetComponentDataFromEntity<BulletData>(true);
+        allUFOs = GetComponentDataFromEntity<UFOData>(true);
         
         Dependency.Complete();
     

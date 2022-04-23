@@ -6,7 +6,6 @@ using Random = Unity.Mathematics.Random;
 
 public partial class UFOSystem : SystemBase
 {
-    
     protected override void OnUpdate()
     {
         float deltaTime = Time.DeltaTime;
@@ -15,6 +14,10 @@ public partial class UFOSystem : SystemBase
         {
             ufoData.GameTime += deltaTime;
             ufoData.RandomValue = Random.CreateFromIndex((uint)ufoData.GameTime);
+            if (ufoData.ShotByPlayer)
+            {
+                ufoData.ResetUFOData = true;
+            }
             if (!ufoData.InAction)
             {
                 ufoData.StartActionAccumulatedTime += deltaTime;
@@ -51,6 +54,12 @@ public partial class UFOSystem : SystemBase
             float distanceFromCenter = math.distancesq(position.Value, float3.zero);
             if (distanceFromCenter > ufoData.DistanceFromCenterResetValue)
             {
+                ufoData.ResetUFOData = true;
+            }
+
+            if (ufoData.ResetUFOData)
+            {
+                ufoData.ResetUFOData = false;
                 // Return to one of random initial positions
                 float rnd = ufoData.RandomValue.NextInt(0, 100);
                 position.Value = rnd < 50 ? new float3(50, 0, 0) : new float3(-50, 0, 0);
@@ -61,15 +70,12 @@ public partial class UFOSystem : SystemBase
                 ufoData.StartActionAccumulatedTime = 0;
                 ufoData.DirectionChangeAccumulatedTime = 0;
                 ufoData.alreadyChangedDirecion = false;
-                
                 // Create new values for next attack
                 ufoData.StartActionDelayTime +=
-                    ufoData.RandomValue.NextInt(-ufoData.StartActionOffsetValue, ufoData.StartActionOffsetValue);
+                    ufoData.RandomValue.NextInt(-ufoData.StartActionTimeOffset, ufoData.StartActionTimeOffset);
                 ufoData.DirectionChangeTime += 
-                    ufoData.RandomValue.NextInt(-ufoData.DirectionChangeOffsetValue, ufoData.DirectionChangeOffsetValue);
+                    ufoData.RandomValue.NextInt(-ufoData.DirectionChangeTimeOffset, ufoData.DirectionChangeTimeOffset);
             }
-
-            // Debug.Log("distance from screen center " + distanceFromCenter);
         }).Schedule();
     }
 }
