@@ -67,6 +67,7 @@ public class GameStateData : MonoBehaviour
         {
             playerRespawning = value;
             startRespawnRoutine = true;
+            spreadShotIsEnabled = false;
         }
     }
 

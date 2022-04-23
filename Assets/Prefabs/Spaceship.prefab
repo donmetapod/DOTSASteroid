@@ -394,7 +394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScreenXLimit: 30
-  ScreenYLimit: 25
+  ScreenYLimit: 24
 --- !u!1 &6494862984275421374
 GameObject:
   m_ObjectHideFlags: 0
