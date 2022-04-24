@@ -1950,12 +1950,20 @@ PrefabInstance:
       value: UFO
       objectReference: {fileID: 0}
     - target: {fileID: 514361880528867130, guid: 3613869914375ed4a89cd64e9312d313, type: 3}
+      propertyPath: RespawnWaitTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 514361880528867130, guid: 3613869914375ed4a89cd64e9312d313, type: 3}
       propertyPath: DirectionChangeTime
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 514361880528867130, guid: 3613869914375ed4a89cd64e9312d313, type: 3}
       propertyPath: StartActionDelayTime
-      value: 10
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 514361880528867130, guid: 3613869914375ed4a89cd64e9312d313, type: 3}
+      propertyPath: DirectionChangeTimeOffset
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 514361880528867133, guid: 3613869914375ed4a89cd64e9312d313, type: 3}
       propertyPath: m_RootOrder

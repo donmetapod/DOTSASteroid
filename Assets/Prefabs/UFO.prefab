@@ -335,12 +335,10 @@ MonoBehaviour:
     y: 0
     z: 0
   MovementSpeed: 12
-  StartActionDelayTime: 4
+  StartActionDelayTime: 5
   StartActionAccumulatedTime: 0
-  StartActionTimeOffset: 4
-  DirectionChangeTime: 7
+  DirectionChangeTime: 3
   DirectionChangeAccumulatedTime: 0
-  DirectionChangeTimeOffset: 4
   YScreenLimit: 15
   RandomValue:
     state: 0
@@ -348,3 +346,5 @@ MonoBehaviour:
   DistanceFromCenterResetValue: 3000
   FireRate: 5
   ShootAccumulationTime: 0
+  RespawnWaitTime: 2
+  RecentlyShotAccumulatedTime: 0

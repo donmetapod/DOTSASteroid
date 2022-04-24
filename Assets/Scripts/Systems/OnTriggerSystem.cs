@@ -95,27 +95,26 @@ public partial class OnTriggerSystem : SystemBase
             #endregion
 
             #region Bullets and UFO
-            if (allBullets.HasComponent(entityA) && allUFOs.HasComponent(entityB))
-            {
-                UFOData ufoData = new UFOData
-                {
-                    ShotByPlayer = true
-                };
-                entityCommandBuffer.SetComponent(entityB, ufoData);
-            }
             if (allUFOs.HasComponent(entityA) && allBullets.HasComponent(entityB))
             {
-                BulletData bulletData = new BulletData
-                {
-                    Collided = true
-                };
-                entityCommandBuffer.SetComponent(entityB, bulletData);
-                
-                UFOData ufoData = new UFOData
-                {
-                    ShotByPlayer = true
-                };
-                entityCommandBuffer.SetComponent(entityA, ufoData);
+                UFOData defaultUFOData = allUFOs[entityA];
+                UFOData newUFOData = defaultUFOData;
+                newUFOData.ResetUFOData = true;
+                entityCommandBuffer.SetComponent(entityA, newUFOData);
+                Entity vfxFClone = entityCommandBuffer.Instantiate(allUFOs[entityA].DamageVFX);
+                Translation position = new Translation();
+                position.Value = allUFOs[entityA].LastKnownTranslation.Value;
+                entityCommandBuffer.SetComponent(vfxFClone, position);
+            }else if (allBullets.HasComponent(entityA) && allUFOs.HasComponent(entityB))
+            {
+                UFOData defaultUFOData = allUFOs[entityB];
+                UFOData newUFOData = defaultUFOData;
+                newUFOData.ResetUFOData = true;
+                entityCommandBuffer.SetComponent(entityB, newUFOData);
+                Entity vfxFClone = entityCommandBuffer.Instantiate(allUFOs[entityB].DamageVFX);
+                Translation position = new Translation();
+                position.Value = allUFOs[entityB].LastKnownTranslation.Value;
+                entityCommandBuffer.SetComponent(vfxFClone, position);
             }
             #endregion
 

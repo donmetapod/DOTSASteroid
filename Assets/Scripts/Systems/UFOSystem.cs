@@ -27,11 +27,6 @@ public partial class UFOSystem : SystemBase
             ufoData.GameTime += deltaTime;
             ufoData.RandomValue = Random.CreateFromIndex((uint)ufoData.GameTime);
             
-            if (ufoData.ShotByPlayer)
-            {
-                ufoData.ResetUFOData = true;
-            }
-            
             if (!ufoData.InAction)
             {
                 ufoData.StartActionAccumulatedTime += deltaTime;
@@ -56,6 +51,7 @@ public partial class UFOSystem : SystemBase
             
             // Move UFO
             position.Value += ufoData.MoveDirection * deltaTime;
+            ufoData.LastKnownTranslation = position;
             
             //Change direction after some time
             ufoData.DirectionChangeAccumulatedTime += deltaTime;
@@ -92,15 +88,8 @@ public partial class UFOSystem : SystemBase
                 ufoData.StartActionAccumulatedTime = 0;
                 ufoData.DirectionChangeAccumulatedTime = 0;
                 ufoData.alreadyChangedDirecion = false;
-                ufoData.ShotByPlayer = false;
                 //Used for UFO sfx
                 GameManager.Instance.UfoInAction = false;
-                
-                // Create new values for next attack
-                // ufoData.StartActionDelayTime +=
-                //     ufoData.RandomValue.NextInt(-ufoData.StartActionTimeOffset, ufoData.StartActionTimeOffset);
-                // ufoData.DirectionChangeTime += 
-                //     ufoData.RandomValue.NextInt(-ufoData.DirectionChangeTimeOffset, ufoData.DirectionChangeTimeOffset);
             }
 
             ufoData.ShootAccumulationTime += deltaTime;

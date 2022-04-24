@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6028806668746986677, guid: 1d2d38b9e3e25114fba97ec232d98812, type: 3}
+      propertyPath: ScreenYLimit
+      value: 23
+      objectReference: {fileID: 0}
     - target: {fileID: 1420286154916261650, guid: 1d2d38b9e3e25114fba97ec232d98812, type: 3}
       propertyPath: m_Name
       value: Spaceship
