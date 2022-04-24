@@ -29,7 +29,7 @@ public partial class SpaceshipSystem : SystemBase
                 in LocalToWorld localToWorld, in InputData inputData) =>
             {
                 #region RespawnLogic
-                if (GameStateData.Instance.PlayerRespawning)
+                if (GameManager.Instance.PlayerRespawning)
                 {
                     respawnTime -= deltaTime;
                     position.Value = new float3(-1000, -1000, -1000);
@@ -42,7 +42,7 @@ public partial class SpaceshipSystem : SystemBase
                 }
                 #endregion
                 
-                if(GameStateData.Instance.GameState == GameStateData.GameStateEnum.GameOver)
+                if(GameManager.Instance.GameState == GameManager.GameStateEnum.GameOver)
                     return;
                 
                 shipTranslation = position;
@@ -68,10 +68,10 @@ public partial class SpaceshipSystem : SystemBase
                 }
 
                 // Enable or disable shield object
-                EntityManager.SetEnabled(ship.Shield, GameStateData.Instance.SpaceshipHasShield);
+                EntityManager.SetEnabled(ship.Shield, GameManager.Instance.SpaceshipHasShield);
                 
                 // Enable or disable spread shot object
-                EntityManager.SetEnabled(ship.SpreadShot, GameStateData.Instance.SpreadShotIsEnabled);
+                EntityManager.SetEnabled(ship.SpreadShot, GameManager.Instance.SpreadShotIsEnabled);
                 
             }).WithStructuralChanges().WithoutBurst().Run();
         
@@ -89,6 +89,8 @@ public partial class SpaceshipSystem : SystemBase
         // Shoot bullet from pool
         if (Input.GetMouseButtonDown(0))
         {
+            Debug.Log("shoot bullet");
+            GameManager.Instance.PlayAudioClipWithName("Shoot");
             EndSimulationEntityCommandBufferSystem commandBufferSystem = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
             EntityCommandBuffer entityCommandBuffer = commandBufferSystem.CreateCommandBuffer();
             ComponentDataFromEntity<BulletData> allBulletData = GetComponentDataFromEntity<BulletData>(true);
@@ -103,7 +105,7 @@ public partial class SpaceshipSystem : SystemBase
             int[] spreadShotRotations = {-8, 8, 8 };// Rotations for each one of the spread shot bullets
             for (int i = 0; i < bulletPool.Count; i++)
             {
-                if (GameStateData.Instance.SpreadShotIsEnabled)
+                if (GameManager.Instance.SpreadShotIsEnabled)
                 {
                     BulletData currentBulletData = allBulletData[bulletPool[i]];
                     if (!currentBulletData.IsActive)
@@ -129,6 +131,7 @@ public partial class SpaceshipSystem : SystemBase
                         break;
                     } 
                 }
+                
             }
         }
     }

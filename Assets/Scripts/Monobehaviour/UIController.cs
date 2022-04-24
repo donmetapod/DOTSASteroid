@@ -15,16 +15,16 @@ public class UIController : MonoBehaviour
     private bool showGameOver;
     private void Start()
     {
-        GameStateData.Instance.OnScoreChanged += UpdateScore;
-        GameStateData.Instance.OnLiveLost += UpdateLives;
-        GameStateData.Instance.OnGameOver += ShowGameOverScreen;
+        GameManager.Instance.OnScoreChanged += UpdateScore;
+        GameManager.Instance.OnLiveLost += UpdateLives;
+        GameManager.Instance.OnGameOver += ShowGameOverScreen;
     }
 
     private void OnDisable()
     {
-        GameStateData.Instance.OnScoreChanged -= UpdateScore;
-        GameStateData.Instance.OnLiveLost -= UpdateLives;
-        GameStateData.Instance.OnGameOver -= ShowGameOverScreen;
+        GameManager.Instance.OnScoreChanged -= UpdateScore;
+        GameManager.Instance.OnLiveLost -= UpdateLives;
+        GameManager.Instance.OnGameOver -= ShowGameOverScreen;
     }
 
     public void UpdateScore()
@@ -47,7 +47,7 @@ public class UIController : MonoBehaviour
         if (updateScore)
         {
             updateScore = false;
-            scoreUIText.text = "Score : " + GameStateData.Instance.Score;
+            scoreUIText.text = "Score : " + GameManager.Instance.Score;
         }
 
         if (updateLives)
@@ -55,7 +55,7 @@ public class UIController : MonoBehaviour
             updateLives = false;
             for (int i = 0; i < lifeIcons.Length; i++)
             {
-                if (i < GameStateData.Instance.PlayerLives)
+                if (i < GameManager.Instance.PlayerLives)
                 {
                     lifeIcons[i].SetActive(true);
                 }

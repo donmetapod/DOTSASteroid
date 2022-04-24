@@ -10,5 +10,6 @@ public struct AsteroidData : IComponentData
     public float3 MoveDirection;
     public float TargetOffset;
     public Entity SmallerAsteroid;
+    public Entity ExplosionVfx;
     public Translation LastKnownTranslation;
 }

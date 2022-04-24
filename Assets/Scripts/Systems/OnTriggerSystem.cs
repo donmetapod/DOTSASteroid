@@ -17,7 +17,8 @@ public partial class OnTriggerSystem : SystemBase
     public static ComponentDataFromEntity<AsteroidData> allAsteroids;
     public static ComponentDataFromEntity<BulletData> allBullets;
     public static ComponentDataFromEntity<UFOData> allUFOs;
-    
+    // public static ComponentDataFromEntity<Translation> allTranslations;
+
     private EntityQuery entityQuery;
     
     protected override void OnCreate()
@@ -59,18 +60,18 @@ public partial class OnTriggerSystem : SystemBase
             #region Player and Asteroids triggers
             if (allPlayers.HasComponent(entityA) && allAsteroids.HasComponent(entityB))
             {
-                if (!GameStateData.Instance.SpaceshipHasShield)
+                if (!GameManager.Instance.SpaceshipHasShield)
                 {
-                    if (!GameStateData.Instance.PlayerRespawning)
+                    if (!GameManager.Instance.PlayerRespawning)
                     {
-                        GameStateData.Instance.PlayerRespawning = true;
-                        GameStateData.Instance.PlayerLives--;
+                        GameManager.Instance.PlayerRespawning = true;
+                        GameManager.Instance.PlayerLives--;
                     }
                 }
                 else
                 {
                     entityCommandBuffer.DestroyEntity(entityB);
-                    GameStateData.Instance.SpaceshipHasShield = false;
+                    GameManager.Instance.SpaceshipHasShield = false;
                 }
             }
             #endregion
@@ -82,11 +83,11 @@ public partial class OnTriggerSystem : SystemBase
                 // Get power up type
                 if (allPowerUps[entityA].PowerUpType == PowerUpData.PowerUpTypeEnum.Shield)
                 {
-                    GameStateData.Instance.SpaceshipHasShield = true;
+                    GameManager.Instance.SpaceshipHasShield = true;
                 }
                 else
                 {
-                    GameStateData.Instance.SpreadShotIsEnabled = true;
+                    GameManager.Instance.SpreadShotIsEnabled = true;
                 }
 
                 entityCommandBuffer.DestroyEntity(entityA);
@@ -104,8 +105,6 @@ public partial class OnTriggerSystem : SystemBase
             }
             if (allUFOs.HasComponent(entityA) && allBullets.HasComponent(entityB))
             {
-                // if (allUFOs[entityA].ShotByPlayer)
-                //     return;
                 BulletData bulletData = new BulletData
                 {
                     Collided = true
@@ -126,10 +125,10 @@ public partial class OnTriggerSystem : SystemBase
                 Debug.Log("Player is Entity A");
             }else if (allBullets.HasComponent(entityA) && allPlayers.HasComponent(entityB))
             {
-                if (!GameStateData.Instance.PlayerRespawning)
+                if (!GameManager.Instance.PlayerRespawning)
                 {
-                    GameStateData.Instance.PlayerRespawning = true;
-                    GameStateData.Instance.PlayerLives--;
+                    GameManager.Instance.PlayerRespawning = true;
+                    GameManager.Instance.PlayerLives--;
                 }
             }
             #endregion
@@ -160,8 +159,15 @@ public partial class OnTriggerSystem : SystemBase
                     entityCommandBuffer.SetComponent(smallAsteroidClone, smallAsteroidTranslation);
                 }
             }
+
+            Entity explosionVFX = entityCommandBuffer.Instantiate(allAsteroids[damagedEntity].ExplosionVfx);
+            Translation position = new Translation
+            {
+                Value = destroyedAsteroidData.LastKnownTranslation.Value //Workaround since I was getting a Write only error accessing directly to translation data
+            };
+            entityCommandBuffer.SetComponent(explosionVFX, position);
             entityCommandBuffer.DestroyEntity(damagedEntity);
-            GameStateData.Instance.Score++;
+            GameManager.Instance.Score++;
         }
     }
 
@@ -178,7 +184,8 @@ public partial class OnTriggerSystem : SystemBase
         allAsteroids = GetComponentDataFromEntity<AsteroidData>();
         allUFOs = GetComponentDataFromEntity<UFOData>(true);
         allBullets = GetComponentDataFromEntity<BulletData>(true);
-
+        // allTranslations = GetComponentDataFromEntity<Translation>();
+        
         Dependency.Complete();
     
         NativeList<TriggerEvent> triggerEvents = new NativeList<TriggerEvent>(Allocator.TempJob);

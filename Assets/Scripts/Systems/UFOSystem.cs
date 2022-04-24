@@ -41,6 +41,9 @@ public partial class UFOSystem : SystemBase
                     
                     //Set initial random Y position
                     position.Value.y = ufoData.RandomValue.NextFloat(-ufoData.YScreenLimit, ufoData.YScreenLimit);
+                    
+                    //Used for UFO sfx
+                    GameManager.Instance.UfoInAction = true;
                 }
                 return;
             }
@@ -83,6 +86,9 @@ public partial class UFOSystem : SystemBase
                 ufoData.DirectionChangeAccumulatedTime = 0;
                 ufoData.alreadyChangedDirecion = false;
                 ufoData.ShotByPlayer = false;
+                //Used for UFO sfx
+                GameManager.Instance.UfoInAction = false;
+                
                 // Create new values for next attack
                 ufoData.StartActionDelayTime +=
                     ufoData.RandomValue.NextInt(-ufoData.StartActionTimeOffset, ufoData.StartActionTimeOffset);
@@ -99,7 +105,7 @@ public partial class UFOSystem : SystemBase
                 EndSimulationEntityCommandBufferSystem commandBufferSystem = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
                 EntityCommandBuffer entityCommandBuffer = commandBufferSystem.CreateCommandBuffer();
                 ComponentDataFromEntity<BulletData> allBulletData = GetComponentDataFromEntity<BulletData>(true);
-                
+                GameManager.Instance.PlayAudioClipWithName("Shoot");
                 BulletData activeBullet = new BulletData
                 {
                     IsActive = true,

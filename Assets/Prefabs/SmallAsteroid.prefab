@@ -121,6 +121,7 @@ MonoBehaviour:
     z: 0
   TargetOffset: 0
   SmallerAsteroid: {fileID: 0}
+  ExplosionVfx: {fileID: 2838528200501955126, guid: 9b4fb4a584545f845b02453cb6cfd3bb, type: 3}
   LastKnownTranslation:
     Value:
       x: 0
