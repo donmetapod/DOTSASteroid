@@ -11,6 +11,9 @@ public partial class UFOSystem : SystemBase
     
     protected override void OnUpdate()
     {
+        if (GameManager.Instance.GameState == GameManager.GameStateEnum.GameOver)
+            return;
+        
         Entities.ForEach((Entity entity,ref BulletData bulletData) =>
         {
             if (!bulletData.AddedToPool && bulletData.UFOBullet)

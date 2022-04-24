@@ -7,6 +7,7 @@ using Random = Unity.Mathematics.Random;
 public struct UFOData : IComponentData
 {
     public bool InAction;
+    public bool IsSmallUFO;
     public bool alreadyChangedDirecion;
     public bool ResetUFOData;
     public float3 MoveDirection;

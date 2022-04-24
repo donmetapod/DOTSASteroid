@@ -13,7 +13,7 @@ public partial class OnTriggerSystem : SystemBase
     private BuildPhysicsWorld buildPhysicsWorld;
     private StepPhysicsWorld stepPhysicsWorld;
     public static ComponentDataFromEntity<PowerUpData> allPowerUps;
-    public static ComponentDataFromEntity<PlayerTag> allPlayers;
+    public static ComponentDataFromEntity<SpaceshipData> allPlayers;
     public static ComponentDataFromEntity<AsteroidData> allAsteroids;
     public static ComponentDataFromEntity<BulletData> allBullets;
     public static ComponentDataFromEntity<UFOData> allUFOs;
@@ -50,10 +50,10 @@ public partial class OnTriggerSystem : SystemBase
             // Bullet entity A collides with asteroid Entity B
             if (allBullets.HasComponent(entityA) && allAsteroids.HasComponent(entityB))
             {
-                KillEntity(entityCommandBuffer, entityA, entityB);
+                KillAsteroidEntity(entityCommandBuffer, entityA, entityB);
             }else if (allAsteroids.HasComponent(entityA) && allBullets.HasComponent(entityB)) // Bullet entity B collides with asteroid Entity A
             {
-                KillEntity(entityCommandBuffer, entityB, entityA);
+                KillAsteroidEntity(entityCommandBuffer, entityB, entityA);
             }
             #endregion
 
@@ -62,11 +62,7 @@ public partial class OnTriggerSystem : SystemBase
             {
                 if (!GameManager.Instance.SpaceshipHasShield)
                 {
-                    if (!GameManager.Instance.PlayerRespawning)
-                    {
-                        GameManager.Instance.PlayerRespawning = true;
-                        GameManager.Instance.PlayerLives--;
-                    }
+                    LoseLife(entityCommandBuffer, entityA);
                 }
                 else
                 {
@@ -105,6 +101,9 @@ public partial class OnTriggerSystem : SystemBase
                 Translation position = new Translation();
                 position.Value = allUFOs[entityA].LastKnownTranslation.Value;
                 entityCommandBuffer.SetComponent(vfxFClone, position);
+                position.Value = new float3(50, 50, 50);
+                entityCommandBuffer.SetComponent(entityB, position);//Moves bullet outside the screen
+                GameManager.Instance.Score += 100;
             }else if (allBullets.HasComponent(entityA) && allUFOs.HasComponent(entityB))
             {
                 UFOData defaultUFOData = allUFOs[entityB];
@@ -115,25 +114,47 @@ public partial class OnTriggerSystem : SystemBase
                 Translation position = new Translation();
                 position.Value = allUFOs[entityB].LastKnownTranslation.Value;
                 entityCommandBuffer.SetComponent(vfxFClone, position);
+                position.Value = new float3(50, 50, 50);
+                entityCommandBuffer.SetComponent(entityA, position);//Moves bullet outside the screen
+                GameManager.Instance.Score += 100;
             }
             #endregion
 
             #region UFO Bullets with spaceship
             if (allPlayers.HasComponent(entityA) && allBullets.HasComponent(entityB))
             {
-                Debug.Log("Player is Entity A");
+                LoseLife(entityCommandBuffer, entityA);
             }else if (allBullets.HasComponent(entityA) && allPlayers.HasComponent(entityB))
             {
-                if (!GameManager.Instance.PlayerRespawning)
-                {
-                    GameManager.Instance.PlayerRespawning = true;
-                    GameManager.Instance.PlayerLives--;
-                }
+                LoseLife(entityCommandBuffer, entityB);
+            }
+
+            #endregion
+
+            #region UFO and Spaceship
+            if (allPlayers.HasComponent(entityA) && allUFOs.HasComponent(entityB))
+            {
+                LoseLife(entityCommandBuffer, entityA);
+            }else if (allUFOs.HasComponent(entityA) && allPlayers.HasComponent(entityB))
+            {
+                LoseLife(entityCommandBuffer, entityB);
             }
             #endregion
         }
 
-        private static void KillEntity(EntityCommandBuffer entityCommandBuffer, Entity attackerEntity, Entity damagedEntity)
+        private static void LoseLife(EntityCommandBuffer entityCommandBuffer, Entity playerEntity)
+        {
+            if (!GameManager.Instance.PlayerRespawning)
+            {
+                Entity explosionClone = entityCommandBuffer.Instantiate(allPlayers[playerEntity].DestroyVfx);
+                Translation position = allPlayers[playerEntity].LastKnowPosition;
+                entityCommandBuffer.SetComponent(explosionClone, position);
+                GameManager.Instance.PlayerRespawning = true;
+                GameManager.Instance.PlayerLives--;
+            }
+        }
+
+        private static void KillAsteroidEntity(EntityCommandBuffer entityCommandBuffer, Entity attackerEntity, Entity damagedEntity)
         {
             BulletData inactiveBullet = new BulletData
             {
@@ -162,11 +183,11 @@ public partial class OnTriggerSystem : SystemBase
             Entity explosionVFX = entityCommandBuffer.Instantiate(allAsteroids[damagedEntity].ExplosionVfx);
             Translation position = new Translation
             {
-                Value = destroyedAsteroidData.LastKnownTranslation.Value //Workaround since I was getting a Write only error accessing directly to translation data
+                Value = destroyedAsteroidData.LastKnownTranslation.Value
             };
             entityCommandBuffer.SetComponent(explosionVFX, position);
             entityCommandBuffer.DestroyEntity(damagedEntity);
-            GameManager.Instance.Score++;
+            GameManager.Instance.Score += 50;
         }
     }
 
@@ -179,7 +200,7 @@ public partial class OnTriggerSystem : SystemBase
     protected override void OnUpdate()
     {
         allPowerUps = GetComponentDataFromEntity<PowerUpData>(true);
-        allPlayers = GetComponentDataFromEntity<PlayerTag>(true);
+        allPlayers = GetComponentDataFromEntity<SpaceshipData>(true);
         allAsteroids = GetComponentDataFromEntity<AsteroidData>();
         allUFOs = GetComponentDataFromEntity<UFOData>(true);
         allBullets = GetComponentDataFromEntity<BulletData>(true);

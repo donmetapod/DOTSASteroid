@@ -48,6 +48,7 @@ public partial class SpaceshipSystem : SystemBase
                 
                 shipTranslation = position;
                 shipRotation = rotation;
+                ship.LastKnowPosition = position;
                 
                 bool isRightKeyPressed = Input.GetKey(inputData.rightKey);
                 bool isLeftKeyPressed = Input.GetKey(inputData.leftKey);
