@@ -57,13 +57,25 @@ public class GameManager : MonoBehaviour
     public bool SpaceshipHasShield
     {
         get => spaceshipHasShield;
-        set => spaceshipHasShield = value;
+        set
+        {
+            spaceshipHasShield = value;
+            audioController.SfxToPlay = "ShieldPowerUp";
+            audioController.PlaySFX();
+            StartCoroutine(RemoveTemporaryShield());
+        }
     }
 
     public bool SpreadShotIsEnabled
     {
         get => spreadShotIsEnabled;
-        set => spreadShotIsEnabled = value;
+        set
+        {
+            spreadShotIsEnabled = value;
+            audioController.SfxToPlay = "SpreadShotPowerUp";
+            audioController.PlaySFX();
+            StartCoroutine(RemoveTemporarySpreadShot());
+        }
     }
 
     public bool PlayerRespawning
@@ -108,5 +120,17 @@ public class GameManager : MonoBehaviour
     public void PlayAudioClipWithName(string clipName)
     {
         audioController.PlayAudioClip(clipName);
+    }
+
+    IEnumerator RemoveTemporaryShield()
+    {
+        yield return new WaitForSeconds(10);
+        spaceshipHasShield = false;
+    }
+
+    IEnumerator RemoveTemporarySpreadShot()
+    {
+        yield return new WaitForSeconds(10);
+        spreadShotIsEnabled = false;
     }
 }

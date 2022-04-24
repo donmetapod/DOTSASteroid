@@ -76,30 +76,10 @@ public partial class OnTriggerSystem : SystemBase
 
             if (allPowerUps.HasComponent(entityA) && allPlayers.HasComponent(entityB))
             {
-                // Get power up type
-                if (allPowerUps[entityA].PowerUpType == PowerUpData.PowerUpTypeEnum.Shield)
-                {
-                    GameManager.Instance.SpaceshipHasShield = true;
-                }
-                else
-                {
-                    GameManager.Instance.SpreadShotIsEnabled = true;
-                }
-
-                entityCommandBuffer.DestroyEntity(entityA);
+                GetPowerUp(entityA, entityCommandBuffer);
             }else if (allPlayers.HasComponent(entityA) && allPowerUps.HasComponent(entityB))
             {
-                // Get power up type
-                if (allPowerUps[entityB].PowerUpType == PowerUpData.PowerUpTypeEnum.Shield)
-                {
-                    GameManager.Instance.SpaceshipHasShield = true;
-                }
-                else
-                {
-                    GameManager.Instance.SpreadShotIsEnabled = true;
-                }
-
-                entityCommandBuffer.DestroyEntity(entityB);
+                GetPowerUp(entityB, entityCommandBuffer);
             }
 
             #endregion
@@ -107,30 +87,10 @@ public partial class OnTriggerSystem : SystemBase
             #region Bullets and UFO
             if (allUFOs.HasComponent(entityA) && allBullets.HasComponent(entityB))
             {
-                UFOData defaultUFOData = allUFOs[entityA];
-                UFOData newUFOData = defaultUFOData;
-                newUFOData.ResetUFOData = true;
-                entityCommandBuffer.SetComponent(entityA, newUFOData);
-                Entity vfxFClone = entityCommandBuffer.Instantiate(allUFOs[entityA].DamageVFX);
-                Translation position = new Translation();
-                position.Value = allUFOs[entityA].LastKnownTranslation.Value;
-                entityCommandBuffer.SetComponent(vfxFClone, position);
-                position.Value = new float3(50, 50, 50);
-                entityCommandBuffer.SetComponent(entityB, position);//Moves bullet outside the screen
-                GameManager.Instance.Score += 100;
+                KillUFO(entityA, entityCommandBuffer, entityB);
             }else if (allBullets.HasComponent(entityA) && allUFOs.HasComponent(entityB))
             {
-                UFOData defaultUFOData = allUFOs[entityB];
-                UFOData newUFOData = defaultUFOData;
-                newUFOData.ResetUFOData = true;
-                entityCommandBuffer.SetComponent(entityB, newUFOData);
-                Entity vfxFClone = entityCommandBuffer.Instantiate(allUFOs[entityB].DamageVFX);
-                Translation position = new Translation();
-                position.Value = allUFOs[entityB].LastKnownTranslation.Value;
-                entityCommandBuffer.SetComponent(vfxFClone, position);
-                position.Value = new float3(50, 50, 50);
-                entityCommandBuffer.SetComponent(entityA, position);//Moves bullet outside the screen
-                GameManager.Instance.Score += 100;
+                KillUFO(entityB, entityCommandBuffer, entityA);
             }
             #endregion
 
@@ -154,6 +114,36 @@ public partial class OnTriggerSystem : SystemBase
                 LoseLife(entityCommandBuffer, entityB);
             }
             #endregion
+        }
+
+        private static void KillUFO(Entity entityA, EntityCommandBuffer entityCommandBuffer, Entity entityB)
+        {
+            UFOData defaultUFOData = allUFOs[entityA];
+            UFOData newUFOData = defaultUFOData;
+            newUFOData.ResetUFOData = true;
+            entityCommandBuffer.SetComponent(entityA, newUFOData);
+            Entity vfxFClone = entityCommandBuffer.Instantiate(allUFOs[entityA].DamageVFX);
+            Translation position = new Translation();
+            position.Value = allUFOs[entityA].LastKnownTranslation.Value;
+            entityCommandBuffer.SetComponent(vfxFClone, position);
+            position.Value = new float3(50, 50, 50);
+            entityCommandBuffer.SetComponent(entityB, position); //Moves bullet outside the screen
+            GameManager.Instance.Score += 100;
+        }
+
+        private static void GetPowerUp(Entity entityA, EntityCommandBuffer entityCommandBuffer)
+        {
+            // Get power up type
+            if (allPowerUps[entityA].PowerUpType == PowerUpData.PowerUpTypeEnum.Shield)
+            {
+                GameManager.Instance.SpaceshipHasShield = true;
+            }
+            else
+            {
+                GameManager.Instance.SpreadShotIsEnabled = true;
+            }
+
+            entityCommandBuffer.DestroyEntity(entityA);
         }
 
         private static void LoseLife(EntityCommandBuffer entityCommandBuffer, Entity playerEntity)

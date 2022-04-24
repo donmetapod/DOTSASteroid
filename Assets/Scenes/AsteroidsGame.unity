@@ -1038,8 +1038,8 @@ MonoBehaviour:
   - {fileID: 765815460196260148, guid: 8a5a36e929875cf4584fe358e2c8d5d3, type: 3}
   graduallyReduceSpawnDelay: 0
   reduceSpawnDelayRatio: 0.01
-  initialSpawnDelay: 1
-  instatiationDelay: 5
+  initialSpawnDelay: 20
+  instatiationDelay: 15
   spawnAreaCloseRange: 10
   spawnAreaFarRange: 14
 --- !u!4 &1101352044
@@ -1946,6 +1946,12 @@ MonoBehaviour:
   - clipName: LoseLife
     clip: {fileID: 8300000, guid: 8d586f56fd7aa49e3a4935fa7514e441, type: 3}
     volume: 1
+  - clipName: ShieldPowerUp
+    clip: {fileID: 8300000, guid: 53b3ac3e2478e437ea06485e505fad65, type: 3}
+    volume: 1
+  - clipName: SpreadShotPowerUp
+    clip: {fileID: 8300000, guid: 6c7273f79f23448b297bbff01b78150a, type: 3}
+    volume: 0.7
 --- !u!4 &2006482252
 Transform:
   m_ObjectHideFlags: 0
@@ -2072,7 +2078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 514361880528867077, guid: 3613869914375ed4a89cd64e9312d313, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 514361880528867130, guid: 3613869914375ed4a89cd64e9312d313, type: 3}
       propertyPath: StartActionDelayTime

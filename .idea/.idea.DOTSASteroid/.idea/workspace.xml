@@ -7,32 +7,15 @@
     <list default="true" id="607880ec-e936-492e-b16e-7097f5658458" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DOTSASteroid/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DOTSASteroid/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.plastic/plastic.wktree" beforeDir="false" afterPath="$PROJECT_DIR$/.plastic/plastic.wktree" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Asteroid.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Asteroid.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BlueFireImpact.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BlueFireImpact.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BlueSharpImpact.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BlueSharpImpact.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Bullet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Bullet.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ExhaustDust.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ExhaustDust.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/GreenSharpImpact.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/GreenSharpImpact.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RedFireImpact.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RedFireImpact.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RedSharpImpact.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RedSharpImpact.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3drPartyAssets/Archanor/Sci-Fi Arsenal/Sci-Fi Effects/Materials/Gradients/powerup_gradient2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3drPartyAssets/Archanor/Sci-Fi Arsenal/Sci-Fi Effects/Materials/Gradients/powerup_gradient2.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ShieldPowerUp.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/ShieldPowerUp.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/SmallAsteroid.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/SmallAsteroid.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/SpreadShotPowerUp.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/SpreadShotPowerUp.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UFOBullet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UFOBullet.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/YellowSharpImpact.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/YellowSharpImpact.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/AsteroidsGame.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/AsteroidsGame.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Data/SelfDestroyData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Data/SelfDestroyData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Data/UFOData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Data/UFOData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Monobehaviour/SpawnerMono.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Monobehaviour/SpawnerMono.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Data/InputData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Data/InputData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Monobehaviour/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Monobehaviour/GameManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Systems/OnTriggerSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Systems/OnTriggerSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Systems/SelfDestroySystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Systems/SelfDestroySystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Systems/SpaceshipSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Systems/SpaceshipSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +119,7 @@
       <updated>1650578991564</updated>
       <workItem from="1650579006167" duration="15351000" />
       <workItem from="1650635456655" duration="51074000" />
-      <workItem from="1650811914019" duration="19926000" />
+      <workItem from="1650811914019" duration="24447000" />
     </task>
     <servers />
   </component>

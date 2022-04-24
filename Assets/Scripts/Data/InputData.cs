@@ -1,12 +1,15 @@
 using Unity.Entities;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [GenerateAuthoringComponent]
 public struct InputData : IComponentData
 {
-    public KeyCode upKey;
-    public KeyCode downKey;
-    public KeyCode rightKey;
-    public KeyCode leftKey;
-    
+    public KeyCode UpKey;
+    public KeyCode DownKey;
+    public KeyCode RightKey;
+    public KeyCode LeftKey;
+    public KeyCode SpaceKey;
+    public PointerInputModule.MouseButtonEventData MouseButtonEventData;
+
 }
