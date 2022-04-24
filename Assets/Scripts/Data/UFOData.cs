@@ -21,4 +21,6 @@ public struct UFOData : IComponentData
     public Random RandomValue;
     public float GameTime; // Used for random seed
     public float DistanceFromCenterResetValue;
+    public float FireRate;
+    public float ShootAccumulationTime;
 }

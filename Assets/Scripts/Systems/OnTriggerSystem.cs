@@ -36,6 +36,7 @@ public partial class OnTriggerSystem : SystemBase
     public struct CollectTriggerEventsJob : ITriggerEventsJob
     {
         public NativeList<TriggerEvent> triggerEvents;
+        
         public void Execute(TriggerEvent triggerEvent)
         {
             triggerEvents.Add(triggerEvent);
@@ -43,6 +44,7 @@ public partial class OnTriggerSystem : SystemBase
             Entity entityB = triggerEvent.EntityB;
             EntityCommandBuffer entityCommandBuffer = GameStateSystem.commandBufferSystem.CreateCommandBuffer();
             
+            //TODO find a cleaner way to check for triggers
             #region Bullets and Asteroids triggers
             // Bullet entity A collides with asteroid Entity B
             if (allBullets.HasComponent(entityA) && allAsteroids.HasComponent(entityB))
@@ -57,7 +59,6 @@ public partial class OnTriggerSystem : SystemBase
             #region Player and Asteroids triggers
             if (allPlayers.HasComponent(entityA) && allAsteroids.HasComponent(entityB))
             {
-                
                 if (!GameStateData.Instance.SpaceshipHasShield)
                 {
                     if (!GameStateData.Instance.PlayerRespawning)
@@ -65,8 +66,6 @@ public partial class OnTriggerSystem : SystemBase
                         GameStateData.Instance.PlayerRespawning = true;
                         GameStateData.Instance.PlayerLives--;
                     }
-                    // Debug.Log("trigger with asteroid");
-                    // entityCommandBuffer.DestroyEntity(entityB); EntityB is colliding asteroid 
                 }
                 else
                 {
@@ -95,18 +94,44 @@ public partial class OnTriggerSystem : SystemBase
             #endregion
 
             #region Bullets and UFO
-
-            if (allPlayers.HasComponent(entityA) && allUFOs.HasComponent(entityB))
+            if (allBullets.HasComponent(entityA) && allUFOs.HasComponent(entityB))
             {
-                // var allUfO = allUFOs[entityB];
-                // allUfO.ShotByPlayer = true;
+                UFOData ufoData = new UFOData
+                {
+                    ShotByPlayer = true
+                };
+                entityCommandBuffer.SetComponent(entityB, ufoData);
             }
-            if (allUFOs.HasComponent(entityA) && allPlayers.HasComponent(entityB))
+            if (allUFOs.HasComponent(entityA) && allBullets.HasComponent(entityB))
             {
-                // var allUfO = allUFOs[entityB];
-                // allUfO.ShotByPlayer = true;
+                // if (allUFOs[entityA].ShotByPlayer)
+                //     return;
+                BulletData bulletData = new BulletData
+                {
+                    Collided = true
+                };
+                entityCommandBuffer.SetComponent(entityB, bulletData);
+                
+                UFOData ufoData = new UFOData
+                {
+                    ShotByPlayer = true
+                };
+                entityCommandBuffer.SetComponent(entityA, ufoData);
             }
+            #endregion
 
+            #region UFO Bullets with spaceship
+            if (allPlayers.HasComponent(entityA) && allBullets.HasComponent(entityB))
+            {
+                Debug.Log("Player is Entity A");
+            }else if (allBullets.HasComponent(entityA) && allPlayers.HasComponent(entityB))
+            {
+                if (!GameStateData.Instance.PlayerRespawning)
+                {
+                    GameStateData.Instance.PlayerRespawning = true;
+                    GameStateData.Instance.PlayerLives--;
+                }
+            }
             #endregion
         }
 
@@ -145,16 +170,15 @@ public partial class OnTriggerSystem : SystemBase
         base.OnStartRunning();
         this.RegisterPhysicsRuntimeSystemReadOnly();
     }
-
-   
+    
     protected override void OnUpdate()
     {
         allPowerUps = GetComponentDataFromEntity<PowerUpData>(true);
         allPlayers = GetComponentDataFromEntity<PlayerTag>(true);
         allAsteroids = GetComponentDataFromEntity<AsteroidData>();
-        allBullets = GetComponentDataFromEntity<BulletData>(true);
         allUFOs = GetComponentDataFromEntity<UFOData>(true);
-        
+        allBullets = GetComponentDataFromEntity<BulletData>(true);
+
         Dependency.Complete();
     
         NativeList<TriggerEvent> triggerEvents = new NativeList<TriggerEvent>(Allocator.TempJob);
@@ -178,8 +202,7 @@ public partial class OnTriggerSystem : SystemBase
             {
                 int numTriggerEvents = 0;
                 TriggerEvent triggerEvent = default;
-                // expectedNumberOfTriggerEvents += eventChecker.NumExpectedEvents;
-    
+
                 for (int i = 0; i < triggerEvents.Length; i++)
                 {
                     if (triggerEvents[i].EntityA == entity || triggerEvents[i].EntityB == entity)

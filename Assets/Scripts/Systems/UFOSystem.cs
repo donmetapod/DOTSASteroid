@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -6,11 +7,22 @@ using Random = Unity.Mathematics.Random;
 
 public partial class UFOSystem : SystemBase
 {
+    List<Entity> bulletPoolUFO = new List<Entity>();
+    
     protected override void OnUpdate()
     {
+        Entities.ForEach((Entity entity,ref BulletData bulletData) =>
+        {
+            if (!bulletData.AddedToPool && bulletData.UFOBullet)
+            {
+                bulletPoolUFO.Add(entity);
+                bulletData.AddedToPool = true;
+            }
+        }).WithoutBurst().Run();
+        
         float deltaTime = Time.DeltaTime;
 
-        Entities.ForEach((Entity entity, int entityInQueryIndex,ref Translation position, ref Rotation rotation, ref UFOData ufoData) =>
+        Entities.ForEach((ref Translation position, ref Rotation rotation, ref UFOData ufoData) =>
         {
             ufoData.GameTime += deltaTime;
             ufoData.RandomValue = Random.CreateFromIndex((uint)ufoData.GameTime);
@@ -70,12 +82,49 @@ public partial class UFOSystem : SystemBase
                 ufoData.StartActionAccumulatedTime = 0;
                 ufoData.DirectionChangeAccumulatedTime = 0;
                 ufoData.alreadyChangedDirecion = false;
+                ufoData.ShotByPlayer = false;
                 // Create new values for next attack
                 ufoData.StartActionDelayTime +=
                     ufoData.RandomValue.NextInt(-ufoData.StartActionTimeOffset, ufoData.StartActionTimeOffset);
                 ufoData.DirectionChangeTime += 
                     ufoData.RandomValue.NextInt(-ufoData.DirectionChangeTimeOffset, ufoData.DirectionChangeTimeOffset);
             }
-        }).Schedule();
+
+            ufoData.ShootAccumulationTime += deltaTime;
+            
+            // Shoot bullet from UFO bullets pool
+            if (ufoData.ShootAccumulationTime > ufoData.FireRate)
+            {
+                ufoData.ShootAccumulationTime = 0;
+                EndSimulationEntityCommandBufferSystem commandBufferSystem = World.GetOrCreateSystem<EndSimulationEntityCommandBufferSystem>();
+                EntityCommandBuffer entityCommandBuffer = commandBufferSystem.CreateCommandBuffer();
+                ComponentDataFromEntity<BulletData> allBulletData = GetComponentDataFromEntity<BulletData>(true);
+                
+                BulletData activeBullet = new BulletData
+                {
+                    IsActive = true,
+                    Speed = 100
+                };
+                
+                for (int i = 0; i < bulletPoolUFO.Count; i++)
+                {
+                    BulletData currentBulletData = allBulletData[bulletPoolUFO[i]];
+                    if (!currentBulletData.IsActive)
+                    {
+                        entityCommandBuffer.SetComponent(bulletPoolUFO[i], activeBullet);
+                        entityCommandBuffer.SetComponent(bulletPoolUFO[i], position);
+                        // Random bullet direction
+                        Rotation bulletRotation = rotation;
+                        float rnd = ufoData.RandomValue.NextInt(0, 360);
+                        quaternion zRot = quaternion.RotateZ(rnd * Mathf.Deg2Rad);
+                        bulletRotation.Value = math.mul(bulletRotation.Value, zRot);
+                        entityCommandBuffer.SetComponent(bulletPoolUFO[i], bulletRotation);
+                        break;
+                    } 
+                }
+            }
+
+            
+        }).WithoutBurst().Run();
     }
 }

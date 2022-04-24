@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4915520707836253982}
   - component: {fileID: 6096170269319145854}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: UFOBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,6 +101,7 @@ MonoBehaviour:
   Speed: 0
   IsActive: 0
   AddedToPool: 0
+  UFOBullet: 1
 --- !u!114 &1456773761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,9 +230,9 @@ MonoBehaviour:
       m_Override: 0
       m_Value:
         Category00: 0
-        Category01: 1
+        Category01: 0
         Category02: 0
-        Category03: 0
+        Category03: 1
         Category04: 0
         Category05: 0
         Category06: 0
@@ -263,10 +264,10 @@ MonoBehaviour:
     m_CollidesWithCategories:
       m_Override: 0
       m_Value:
-        Category00: 0
+        Category00: 1
         Category01: 0
-        Category02: 1
-        Category03: 1
+        Category02: 0
+        Category03: 0
         Category04: 0
         Category05: 0
         Category06: 0

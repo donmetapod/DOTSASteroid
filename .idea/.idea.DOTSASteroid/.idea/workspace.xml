@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="607880ec-e936-492e-b16e-7097f5658458" name="Changes" comment="" />
+    <list default="true" id="607880ec-e936-492e-b16e-7097f5658458" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.plastic/plastic.changes" beforeDir="false" afterPath="$PROJECT_DIR$/.plastic/plastic.changes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.plastic/plastic.wktree" beforeDir="false" afterPath="$PROJECT_DIR$/.plastic/plastic.wktree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Data/AsteroidData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Data/AsteroidData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Systems/OnTriggerSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Systems/OnTriggerSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Systems/UFOSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Systems/UFOSystem.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,26 +23,32 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities/Serialization/BinarySerialization.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Systems/AsteroidDestroySystem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Systems/SpawnSystem.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UIController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities/Iterators/BufferFromEntity.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities/Diff/EntityPatcher.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities/Stubs/Unity/Debug.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Data/SpawnData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collections@1.2.3-pre.1/Unity.Collections/UnsafeHashMap.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Data/ScoreData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities.Editor/Hierarchy/Model/ChangeTracking/SharedComponentDataDiffer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Data/ShieldData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities.Tests/ProfilerModules/StructuralChangesProfilerTests.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities/Iterators/ComponentDataFromEntity.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AudioController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.6.5/Tests/Runtime/Unity.Burst.Tests/TestCompilerAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities.Tests/ManagedObjectUtilityTests.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities/SystemBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collections@1.2.3-pre.1/Unity.Collections.Tests/FixedListTests.gen.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities.Editor/Hierarchy/Utility/EntityMapDense.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.mathematics@1.2.5/Unity.Mathematics/random.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.12/Editor/PlasticSCM/UI/Progress/ProgressControlsForMigration.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionUtility.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Scenes.Editor/EditorSubSceneLiveConversionSystem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Systems/UFOSystem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities/Types/TypeManagerFieldInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collections@1.2.3-pre.1/Unity.Collections/NativeStream.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Data/GameStateData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Data/PowerUpData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Data/UFOData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities.Hybrid/GameObjectConversion/ConversionDependencies.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Graphic/ImageTests.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="287sVwHtn7SUE4kalHH9FAd2JO7" />
@@ -69,10 +81,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="5856">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="120">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="5856" />
+      <option name="pid" value="120" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -89,7 +101,7 @@
       <option name="presentableId" value="Default" />
       <updated>1650578991564</updated>
       <workItem from="1650579006167" duration="15351000" />
-      <workItem from="1650635456655" duration="25715000" />
+      <workItem from="1650635456655" duration="38874000" />
     </task>
     <servers />
   </component>
@@ -119,29 +131,29 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Systems/OnTriggerSystem.cs</url>
-          <line>66</line>
-          <properties documentPath="C:\Users\donme\Documents\Dev\DOTSASteroid\Assets\Scripts\Systems\OnTriggerSystem.cs" initialLine="66" containingFunctionPresentation="method 'Execute'">
+          <line>100</line>
+          <properties documentPath="C:\Users\donme\Documents\Dev\DOTSASteroid\Assets\Scripts\Systems\OnTriggerSystem.cs" initialLine="100" containingFunctionPresentation="method 'Execute'">
             <startOffsets>
-              <option value="2599" />
+              <option value="3852" />
             </startOffsets>
             <endOffsets>
-              <option value="2646" />
+              <option value="3882" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="14" />
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Systems/OnTriggerSystem.cs</url>
-          <line>73</line>
-          <properties documentPath="C:\Users\donme\Documents\Dev\DOTSASteroid\Assets\Scripts\Systems\OnTriggerSystem.cs" initialLine="73" containingFunctionPresentation="method 'Execute'">
+          <line>105</line>
+          <properties documentPath="C:\Users\donme\Documents\Dev\DOTSASteroid\Assets\Scripts\Systems\OnTriggerSystem.cs" initialLine="105" containingFunctionPresentation="method 'Execute'">
             <startOffsets>
-              <option value="2939" />
+              <option value="4054" />
             </startOffsets>
             <endOffsets>
-              <option value="2982" />
+              <option value="4084" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="15" />
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

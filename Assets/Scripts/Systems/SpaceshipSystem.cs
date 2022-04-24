@@ -12,7 +12,7 @@ using Unity.Physics.Extensions;
 using Unity.Rendering;
 
 [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
-public partial class ShipSystem : SystemBase
+public partial class SpaceshipSystem : SystemBase
 {
     private List<Entity> bulletPool = new List<Entity>();
     private float respawnTime = 2;
@@ -78,7 +78,7 @@ public partial class ShipSystem : SystemBase
         
         Entities.ForEach((Entity entity,ref BulletData bulletData) =>
         {
-            if (!bulletData.AddedToPool)
+            if (!bulletData.AddedToPool && !bulletData.UFOBullet)
             {
                 bulletPool.Add(entity);
                 bulletData.AddedToPool = true;
@@ -101,7 +101,6 @@ public partial class ShipSystem : SystemBase
 
             int spreadShotCount = 0;
             int[] spreadShotRotations = {-8, 8, 8 };// Rotations for each one of the spread shot bullets
-            float zRotationOffset = -0.1f;
             for (int i = 0; i < bulletPool.Count; i++)
             {
                 if (GameStateData.Instance.SpreadShotIsEnabled)
