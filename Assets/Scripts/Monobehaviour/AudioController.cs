@@ -30,7 +30,6 @@ public class AudioController : MonoBehaviour
             if (gameClips[i].clipName.Equals(clipName))
             {
                 AudioSource.PlayClipAtPoint(gameClips[i].clip, Vector3.zero, gameClips[i].volume);
-                Debug.Log("play " + clipName + " audio");
             }
         }
     }
@@ -49,7 +48,7 @@ public class AudioController : MonoBehaviour
         }
         else if(!GameManager.Instance.UfoInAction && ufoSfxSource.volume > 0)
         {
-            ufoSfxSource.volume -= Time.deltaTime * 0.01f;
+            ufoSfxSource.volume -= Time.deltaTime;
         }
         
         //Spaceship thrust

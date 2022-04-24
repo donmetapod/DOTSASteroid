@@ -26,21 +26,27 @@ public partial class UFOSystem : SystemBase
         {
             ufoData.GameTime += deltaTime;
             ufoData.RandomValue = Random.CreateFromIndex((uint)ufoData.GameTime);
+            
             if (ufoData.ShotByPlayer)
             {
                 ufoData.ResetUFOData = true;
             }
+            
             if (!ufoData.InAction)
             {
                 ufoData.StartActionAccumulatedTime += deltaTime;
                 if (ufoData.StartActionAccumulatedTime > ufoData.StartActionDelayTime)
                 {
                     ufoData.InAction = true;
+                    
                     // Set initial direction
                     ufoData.MoveDirection.x = position.Value.x > 0 ? -ufoData.MovementSpeed : ufoData.MovementSpeed;
                     
                     //Set initial random Y position
                     position.Value.y = ufoData.RandomValue.NextFloat(-ufoData.YScreenLimit, ufoData.YScreenLimit);
+                    
+                    // Start accumulating time until direction change
+                    ufoData.DirectionChangeAccumulatedTime = 0;
                     
                     //Used for UFO sfx
                     GameManager.Instance.UfoInAction = true;
@@ -65,7 +71,7 @@ public partial class UFOSystem : SystemBase
                 ufoData.MoveDirection.y = ufoData.MovementSpeed * yMultiplier;
             }
             
-            // If too far from center screen, move back to initial position
+            // If too far from center screen, reset UFO
             float distanceFromCenter = math.distancesq(position.Value, float3.zero);
             if (distanceFromCenter > ufoData.DistanceFromCenterResetValue)
             {
@@ -76,8 +82,9 @@ public partial class UFOSystem : SystemBase
             {
                 ufoData.ResetUFOData = false;
                 // Return to one of random initial positions
-                float rnd = ufoData.RandomValue.NextInt(0, 100);
-                position.Value = rnd < 50 ? new float3(50, 0, 0) : new float3(-50, 0, 0);
+                float randomSide = ufoData.RandomValue.NextInt(0, 100);
+                float randomPositionOffset = ufoData.RandomValue.NextInt(30, 80);
+                position.Value = randomSide < 50 ? new float3(randomPositionOffset, 0, 0) : new float3(-randomPositionOffset, 0, 0);
                 
                 // Reset UFO values
                 ufoData.InAction = false;
@@ -90,10 +97,10 @@ public partial class UFOSystem : SystemBase
                 GameManager.Instance.UfoInAction = false;
                 
                 // Create new values for next attack
-                ufoData.StartActionDelayTime +=
-                    ufoData.RandomValue.NextInt(-ufoData.StartActionTimeOffset, ufoData.StartActionTimeOffset);
-                ufoData.DirectionChangeTime += 
-                    ufoData.RandomValue.NextInt(-ufoData.DirectionChangeTimeOffset, ufoData.DirectionChangeTimeOffset);
+                // ufoData.StartActionDelayTime +=
+                //     ufoData.RandomValue.NextInt(-ufoData.StartActionTimeOffset, ufoData.StartActionTimeOffset);
+                // ufoData.DirectionChangeTime += 
+                //     ufoData.RandomValue.NextInt(-ufoData.DirectionChangeTimeOffset, ufoData.DirectionChangeTimeOffset);
             }
 
             ufoData.ShootAccumulationTime += deltaTime;

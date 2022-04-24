@@ -20,7 +20,8 @@ public partial class SpaceshipSystem : SystemBase
     protected override void OnUpdate()
     {
         
-        float deltaTime = Time.DeltaTime;
+        float deltaTime = Time.fixedDeltaTime;
+        
         Translation shipTranslation = new Translation();
         Rotation shipRotation = new Rotation();
         Entities

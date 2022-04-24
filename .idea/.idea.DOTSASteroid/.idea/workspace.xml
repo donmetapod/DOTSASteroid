@@ -6,18 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="607880ec-e936-492e-b16e-7097f5658458" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DOTSASteroid/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DOTSASteroid/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.plastic/plastic.changes" beforeDir="false" afterPath="$PROJECT_DIR$/.plastic/plastic.changes" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.plastic/plastic.wktree" beforeDir="false" afterPath="$PROJECT_DIR$/.plastic/plastic.wktree" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Asteroid.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Asteroid.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/SmallAsteroid.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/SmallAsteroid.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UFO.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UFO.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/AsteroidsGame.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/AsteroidsGame.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AudioController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Data/AsteroidData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Data/AsteroidData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Monobehaviour/GameStateData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Monobehaviour/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Monobehaviour/GameStateData.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Monobehaviour/GameManager.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Monobehaviour/UIController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Monobehaviour/UIController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Systems/OnTriggerSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Systems/OnTriggerSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Data/UFOData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Data/UFOData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Monobehaviour/AudioController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Monobehaviour/AudioController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Systems/SpaceshipSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Systems/SpaceshipSystem.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Systems/UFOSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Systems/UFOSystem.cs" afterDir="false" />
     </list>
@@ -48,7 +42,6 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities/SystemBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collections@1.2.3-pre.1/Unity.Collections.Tests/FixedListTests.gen.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities.Editor/Hierarchy/Utility/EntityMapDense.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Monobehaviour/VfxController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.mathematics@1.2.5/Unity.Mathematics/random.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.12/Editor/PlasticSCM/UI/Progress/ProgressControlsForMigration.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionUtility.cs" root0="SKIP_HIGHLIGHTING" />
@@ -112,7 +105,7 @@
       <updated>1650578991564</updated>
       <workItem from="1650579006167" duration="15351000" />
       <workItem from="1650635456655" duration="51074000" />
-      <workItem from="1650811914019" duration="3620000" />
+      <workItem from="1650811914019" duration="5810000" />
     </task>
     <servers />
   </component>

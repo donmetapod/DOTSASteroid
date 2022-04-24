@@ -13,10 +13,8 @@ public struct UFOData : IComponentData
     public float MovementSpeed;
     public float StartActionDelayTime;
     public float StartActionAccumulatedTime;
-    public int StartActionTimeOffset;
     public float DirectionChangeTime;
     public float DirectionChangeAccumulatedTime;
-    public int DirectionChangeTimeOffset;
     public float YScreenLimit;
     public Random RandomValue;
     public float GameTime; // Used for random seed
