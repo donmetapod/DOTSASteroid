@@ -10,21 +10,27 @@ using Random = UnityEngine.Random;
 //Testing Entity instantiation from monobehaviour
 public class SpawnerMono : MonoBehaviour
 {
-    public GameObject Prefab;
+    public GameObject[] Prefab;
+    [SerializeField] private bool graduallyReduceSpawnDelay;
+    [SerializeField] private float reduceSpawnDelayRatio = 0.01f;
     [SerializeField] private float initialSpawnDelay = 10;
-    [SerializeField] private int instatiationDelay = 3;
+    [SerializeField] private float instatiationDelay = 3;
     [SerializeField] private float spawnAreaCloseRange = 20;
     [SerializeField] private float spawnAreaFarRange = 25;
     
     
     IEnumerator Start()
     {
+        
         BlobAssetStore blob = new BlobAssetStore();
         var settings = GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, blob);
-        Entity prefabGOToEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(Prefab, settings);
+        
         yield return new WaitForSeconds(initialSpawnDelay);
         while (true)
         {
+            int randomSpawnObj = Random.Range(0, Prefab.Length);
+            Debug.Log(randomSpawnObj);
+            Entity prefabGOToEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(Prefab[randomSpawnObj], settings);
             EntityCommandBuffer entityCommandBuffer = GameStateSystem.commandBufferSystem.CreateCommandBuffer();
             Entity clone = entityCommandBuffer.Instantiate(prefabGOToEntity);
             Vector2 spawnArea = new Vector2(Random.Range(spawnAreaCloseRange, spawnAreaFarRange), Random.Range(spawnAreaCloseRange, spawnAreaFarRange));
@@ -36,7 +42,10 @@ public class SpawnerMono : MonoBehaviour
             initialTranslation.Value = new float3(spawnArea.x, spawnArea.y, 0);
             entityCommandBuffer.SetComponent(clone, initialTranslation);
             yield return new WaitForSeconds(instatiationDelay);
-            
+            if (graduallyReduceSpawnDelay && instatiationDelay > 1)
+            {
+                instatiationDelay -= reduceSpawnDelayRatio;
+            }
         }
     }
 }

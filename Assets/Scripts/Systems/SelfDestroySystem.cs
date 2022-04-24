@@ -7,11 +7,23 @@ using Unity.Transforms;
 
 public partial class SelfDestroySystem : SystemBase
 {
+    private float gameTime;
+    private EntityCommandBuffer entityCommandBuffer;
     protected override void OnUpdate()
     {
-        
-        Entities.ForEach((ref Translation translation, in Rotation rotation) => {
-            
-        }).Schedule();
+        gameTime += Time.DeltaTime;
+        Entities.ForEach((Entity entity, ref SelfDestroyData selfDestroyData) => {
+            if (!selfDestroyData.DestroyTimeSet)
+            {
+                selfDestroyData.DestroyTime = gameTime + selfDestroyData.LifeTime;
+                selfDestroyData.DestroyTimeSet = true;
+            }
+
+            if (selfDestroyData.DestroyTime < gameTime)
+            {
+                entityCommandBuffer = GameStateSystem.commandBufferSystem.CreateCommandBuffer();
+                entityCommandBuffer.DestroyEntity(entity);
+            }
+        }).WithStructuralChanges().Run();
     }
 }

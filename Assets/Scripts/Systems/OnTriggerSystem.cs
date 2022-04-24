@@ -87,7 +87,21 @@ public partial class OnTriggerSystem : SystemBase
                 }
 
                 entityCommandBuffer.DestroyEntity(entityA);
+            }else if (allPlayers.HasComponent(entityA) && allPowerUps.HasComponent(entityB))
+            {
+                // Get power up type
+                if (allPowerUps[entityB].PowerUpType == PowerUpData.PowerUpTypeEnum.Shield)
+                {
+                    GameManager.Instance.SpaceshipHasShield = true;
+                }
+                else
+                {
+                    GameManager.Instance.SpreadShotIsEnabled = true;
+                }
+
+                entityCommandBuffer.DestroyEntity(entityB);
             }
+
             #endregion
 
             #region Bullets and UFO

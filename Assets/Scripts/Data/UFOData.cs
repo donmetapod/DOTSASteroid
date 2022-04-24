@@ -8,6 +8,7 @@ public struct UFOData : IComponentData
 {
     public bool InAction;
     public bool IsSmallUFO;
+    public bool ActiveUFO;
     public bool alreadyChangedDirecion;
     public bool ResetUFOData;
     public float3 MoveDirection;

@@ -6,18 +6,33 @@
   <component name="ChangeListManager">
     <list default="true" id="607880ec-e936-492e-b16e-7097f5658458" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DOTSASteroid/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DOTSASteroid/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.plastic/plastic.changes" beforeDir="false" afterPath="$PROJECT_DIR$/.plastic/plastic.changes" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.plastic/plastic.wktree" beforeDir="false" afterPath="$PROJECT_DIR$/.plastic/plastic.wktree" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3drPartyAssets/Archanor/Sci-Fi Arsenal/Sci-Fi Effects/Prefabs/Interactive/JetFlame/Soft/JetFlameSoftBlue.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3drPartyAssets/Archanor/Sci-Fi Arsenal/Sci-Fi Effects/Prefabs/Interactive/JetFlame/Soft/JetFlameSoftBlue.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3drPartyAssets/Treys/Spaceships/Meshes/3.2.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3drPartyAssets/Treys/Spaceships/Meshes/3.2.fbx.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UFO.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UFO.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Asteroid.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Asteroid.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BlueFireImpact.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BlueFireImpact.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BlueSharpImpact.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BlueSharpImpact.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Bullet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Bullet.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ExhaustDust.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ExhaustDust.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/GreenSharpImpact.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/GreenSharpImpact.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RedFireImpact.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RedFireImpact.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RedSharpImpact.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RedSharpImpact.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ShieldPowerUp.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/ShieldPowerUp.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/SmallAsteroid.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/SmallAsteroid.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/SpreadShotPowerUp.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/SpreadShotPowerUp.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UFOBullet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UFOBullet.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/YellowSharpImpact.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/YellowSharpImpact.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/AsteroidsGame.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/AsteroidsGame.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SpaceshipSubScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SpaceshipSubScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Data/SpaceshipData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Data/SpaceshipData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Data/SelfDestroyData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Data/SelfDestroyData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Data/UFOData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Data/UFOData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Monobehaviour/SpawnerMono.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Monobehaviour/SpawnerMono.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Systems/OnTriggerSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Systems/OnTriggerSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Systems/SpaceshipSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Systems/SpaceshipSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Systems/UFOSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Systems/UFOSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Systems/SelfDestroySystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Systems/SelfDestroySystem.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,24 +58,32 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Data/ShieldData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities.Tests/ProfilerModules/StructuralChangesProfilerTests.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities/Iterators/ComponentDataFromEntity.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Data/UFOControllerData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.6.5/Tests/Runtime/Unity.Burst.Tests/TestCompilerAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities.Tests/ManagedObjectUtilityTests.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities/SystemBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collections@1.2.3-pre.1/Unity.Collections.Tests/FixedListTests.gen.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities.Editor/Hierarchy/Utility/EntityMapDense.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Scenes/LiveConversionPatcher.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Systems/RotatorSystem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Editor/TestBehaviourBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.mathematics@1.2.5/Unity.Mathematics/random.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Systems/UFOControllerSystem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/DocCodeSamples.Tests/StatefulSystem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@1.15.12/Editor/PlasticSCM/UI/Progress/ProgressControlsForMigration.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities.Hybrid/GameObjectConversion/GameObjectConversionUtility.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Temp/GeneratedCode/Assembly-CSharp/UFOSystem__System_1110862680.g.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Scenes.Editor/EditorSubSceneLiveConversionSystem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Systems/UFOSystem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.physics@0.50.0-preview.24/Unity.Physics/Collision/Queries/Raycast.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.6.5/Tests/Runtime/Shared/082-PartialManaged.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities/Types/TypeManagerFieldInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collections@1.2.3-pre.1/Unity.Collections/NativeStream.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Data/PowerUpData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Data/UFOData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities.Hybrid/GameObjectConversion/ConversionDependencies.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/DocCodeSamples.Tests/EntityCommandBuffers.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Graphic/ImageTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.50.0-preview.24/Unity.Entities.CodeGen.Tests/IJobEntity/SourceGenerationTests/JobEntity_WithIntParameters_AndDynamicBuffer.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="287sVwHtn7SUE4kalHH9FAd2JO7" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -92,10 +115,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="40296">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="28696">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="40296" />
+      <option name="pid" value="28696" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -113,7 +136,7 @@
       <updated>1650578991564</updated>
       <workItem from="1650579006167" duration="15351000" />
       <workItem from="1650635456655" duration="51074000" />
-      <workItem from="1650811914019" duration="15151000" />
+      <workItem from="1650811914019" duration="19926000" />
     </task>
     <servers />
   </component>
@@ -137,5 +160,37 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Systems/UFOControllerSystem.cs</url>
+          <line>25</line>
+          <properties documentPath="C:\Users\donme\Documents\Dev\DOTSASteroid\Assets\Scripts\Systems\UFOControllerSystem.cs" initialLine="23" containingFunctionPresentation="lambda expression inside method 'OnUpdate'">
+            <startOffsets>
+              <option value="744" />
+            </startOffsets>
+            <endOffsets>
+              <option value="795" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Systems/UFOControllerSystem.cs</url>
+          <line>23</line>
+          <properties documentPath="C:\Users\donme\Documents\Dev\DOTSASteroid\Assets\Scripts\Systems\UFOControllerSystem.cs" initialLine="21" containingFunctionPresentation="lambda expression inside method 'OnUpdate'">
+            <startOffsets>
+              <option value="643" />
+            </startOffsets>
+            <endOffsets>
+              <option value="713" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

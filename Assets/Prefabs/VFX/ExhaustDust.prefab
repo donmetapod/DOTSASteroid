@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7409648054206294132}
   - component: {fileID: 7409648054187963554}
   - component: {fileID: 7409648054188827152}
+  - component: {fileID: -3581621730930714559}
   m_Layer: 0
   m_Name: ExhaustDust
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7409648054206562574}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 50, y: 50, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4672,3 +4673,18 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-3581621730930714559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7409648054206562574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4cfcbdbba0f88248a810fd3984bfae5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LifeTime: 3
+  DestroyTimeSet: 0
+  DestroyTime: 0
