@@ -1,10 +1,4 @@
-using Unity.Burst;
-using Unity.Collections;
 using Unity.Entities;
-using Unity.Jobs;
-using Unity.Mathematics;
-using Unity.Transforms;
-
 public partial class SelfDestroySystem : SystemBase
 {
     private float gameTime;
@@ -21,7 +15,7 @@ public partial class SelfDestroySystem : SystemBase
 
             if (selfDestroyData.DestroyTime < gameTime)
             {
-                entityCommandBuffer = GameStateSystem.commandBufferSystem.CreateCommandBuffer();
+                entityCommandBuffer = GameReferenceSystem.CommandBufferSystem.CreateCommandBuffer();
                 entityCommandBuffer.DestroyEntity(entity);
             }
         }).WithStructuralChanges().Run();

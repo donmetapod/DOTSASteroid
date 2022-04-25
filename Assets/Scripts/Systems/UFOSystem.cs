@@ -8,12 +8,11 @@ using Random = Unity.Mathematics.Random;
 public partial class UFOSystem : SystemBase
 {
     List<Entity> bulletPoolUFO = new List<Entity>();
-    
     protected override void OnUpdate()
     {
         if (GameManager.Instance.GameState == GameManager.GameStateEnum.GameOver)
             return;
-        
+
         Entities.ForEach((Entity entity,ref BulletData bulletData) =>
         {
             if (!bulletData.AddedToPool && bulletData.UFOBullet)
@@ -29,7 +28,11 @@ public partial class UFOSystem : SystemBase
         {
             ufoData.GameTime += deltaTime;
             ufoData.RandomValue = Random.CreateFromIndex((uint)ufoData.GameTime);
-            
+            if (ufoData.FirstAttackDelayTime > ufoData.GameTime)
+            {
+                return;
+            }
+
             if (!ufoData.InAction)
             {
                 ufoData.StartActionAccumulatedTime += deltaTime;
@@ -58,9 +61,9 @@ public partial class UFOSystem : SystemBase
             
             //Change direction after some time
             ufoData.DirectionChangeAccumulatedTime += deltaTime;
-            if (ufoData.DirectionChangeAccumulatedTime > ufoData.DirectionChangeTime && !ufoData.alreadyChangedDirecion)
+            if (ufoData.DirectionChangeAccumulatedTime > ufoData.DirectionChangeTime && !ufoData.AlreadyChangedDirecion)
             {
-                ufoData.alreadyChangedDirecion = true;
+                ufoData.AlreadyChangedDirecion = true;
                 int yMultiplier = 1;
                 float rnd = ufoData.RandomValue.NextInt(0, 100); // 50% chance of changing y movement downwards
                 if (rnd < 50)
@@ -90,7 +93,7 @@ public partial class UFOSystem : SystemBase
                 ufoData.MoveDirection = float3.zero;
                 ufoData.StartActionAccumulatedTime = 0;
                 ufoData.DirectionChangeAccumulatedTime = 0;
-                ufoData.alreadyChangedDirecion = false;
+                ufoData.AlreadyChangedDirecion = false;
                 //Used for UFO sfx
                 GameManager.Instance.UfoInAction = false;
             }

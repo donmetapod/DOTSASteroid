@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 7503726799006242305}
   - component: {fileID: 7924931682954674431}
   - component: {fileID: -6165800512275527215}
-  - component: {fileID: -5547333481786938931}
   - component: {fileID: -3277881458639046265}
+  - component: {fileID: 37131085517203296}
   m_Layer: 0
   m_Name: SmallAsteroid
   m_TagString: Untagged
@@ -321,18 +321,6 @@ MonoBehaviour:
     Tag05: 0
     Tag06: 0
     Tag07: 0
---- !u!114 &-5547333481786938931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7503726799006242306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f1c671a5e43ace41a7e32f92c83d9b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-3277881458639046265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,6 +335,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScreenXLimit: 24
   ScreenYLimit: 24
+--- !u!114 &37131085517203296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503726799006242306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 244db1183b4f9fc44b76981a852a5769, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  XRotationSpeed: 0
+  YRotationSpeed: 150
+  ZRotationSpeed: 100
 --- !u!1001 &1739697856532055862
 PrefabInstance:
   m_ObjectHideFlags: 0

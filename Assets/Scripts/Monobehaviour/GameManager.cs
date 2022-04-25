@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
-
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +12,8 @@ public class GameManager : MonoBehaviour
     private bool playerRespawning;
     private bool startRespawnRoutine;
     private bool ufoInAction;
+    private bool disableShieldRoutine;
+    private bool disableSpreadshotRoutine;
     public static GameManager Instance;
     public event Action OnScoreChanged; 
     public event Action OnLiveLost; 
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
             spaceshipHasShield = value;
             audioController.SfxToPlay = "ShieldPowerUp";
             audioController.PlaySFX();
-            StartCoroutine(RemoveTemporaryShield());
+            disableShieldRoutine = true;
         }
     }
 
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
             spreadShotIsEnabled = value;
             audioController.SfxToPlay = "SpreadShotPowerUp";
             audioController.PlaySFX();
-            StartCoroutine(RemoveTemporarySpreadShot());
+            disableSpreadshotRoutine = true;
         }
     }
 
@@ -109,6 +109,18 @@ public class GameManager : MonoBehaviour
             startRespawnRoutine = false;
             StartCoroutine(MakeVulnerableAfterRespawn());
         }
+
+        if (disableShieldRoutine)
+        {
+            disableShieldRoutine = false;
+            StartCoroutine(RemoveTemporaryShield());
+        }
+
+        if (disableSpreadshotRoutine)
+        {
+            disableSpreadshotRoutine = false;
+            StartCoroutine(RemoveTemporarySpreadShot());
+        }
     }
 
     IEnumerator MakeVulnerableAfterRespawn()
@@ -124,13 +136,13 @@ public class GameManager : MonoBehaviour
 
     IEnumerator RemoveTemporaryShield()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(8);
         spaceshipHasShield = false;
     }
 
     IEnumerator RemoveTemporarySpreadShot()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(8);
         spreadShotIsEnabled = false;
     }
 }

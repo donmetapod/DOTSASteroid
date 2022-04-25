@@ -1,13 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-//Testing Entity instantiation from monobehaviour
+//Testing Entity instantiation from Monobehaviour
 public class SpawnerMono : MonoBehaviour
 {
     public GameObject[] Prefab;
@@ -17,8 +15,7 @@ public class SpawnerMono : MonoBehaviour
     [SerializeField] private float instatiationDelay = 3;
     [SerializeField] private float spawnAreaCloseRange = 20;
     [SerializeField] private float spawnAreaFarRange = 25;
-    
-    
+
     IEnumerator Start()
     {
         
@@ -29,9 +26,8 @@ public class SpawnerMono : MonoBehaviour
         while (true)
         {
             int randomSpawnObj = Random.Range(0, Prefab.Length);
-            Debug.Log(randomSpawnObj);
             Entity prefabGOToEntity = GameObjectConversionUtility.ConvertGameObjectHierarchy(Prefab[randomSpawnObj], settings);
-            EntityCommandBuffer entityCommandBuffer = GameStateSystem.commandBufferSystem.CreateCommandBuffer();
+            EntityCommandBuffer entityCommandBuffer = GameReferenceSystem.CommandBufferSystem.CreateCommandBuffer();
             Entity clone = entityCommandBuffer.Instantiate(prefabGOToEntity);
             Vector2 spawnArea = new Vector2(Random.Range(spawnAreaCloseRange, spawnAreaFarRange), Random.Range(spawnAreaCloseRange, spawnAreaFarRange));
             int swapXPossibility = Random.Range(1, 100);

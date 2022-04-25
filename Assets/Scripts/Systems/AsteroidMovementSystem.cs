@@ -10,7 +10,7 @@ public partial class AsteroidMovementSystem : SystemBase
     {
         float deltaTime = Time.DeltaTime;
         Translation shipCurrentPosition = new Translation();
-        float3 previousPosition;
+        
         Entities.
             ForEach((in Translation position, in SpaceshipData ship) =>
             {
@@ -28,7 +28,7 @@ public partial class AsteroidMovementSystem : SystemBase
                 asteroidData.MoveDirection = shipCurrentPosition.Value - translation.Value;
             }
             
-            // Moves the asteroids
+            // Move the asteroids
             translation.Value += asteroidData.MoveDirection * deltaTime * asteroidData.MovementSpeed;
             asteroidData.LastKnownTranslation = translation;
         }).Run();

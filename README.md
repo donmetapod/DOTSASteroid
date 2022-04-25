@@ -60,4 +60,5 @@ al perder todas las vidas.
 Sin duda este proyecto estuvo muy interesante, el proceso de "desaprender" a lo que uno está acostumbrado y aprender algo nuevo siempre es doloroso 
 pero termina siendo muy gratificante cuando las cosas empiezan a hacer sentido, mi siguiente paso es el que siempre recomiendo, dar una segunda 
 iteración sobre lo aprendido, limpiar, refactorizar, estudiar formas distintas de lograr lo mismo para incrementar las habilidades y poco a poco
-poder ser capaz de crear proyectos más escalables, optimizados y con mejores prácticas.
+poder ser capaz de crear proyectos más escalables, optimizados y con mejores prácticas, en lo personal me gustaría empezar a leer y practicar más sobre el
+uso del Job System ya que no me dió mucho tiempo para aprender sobre este durante la semana que desarrolle este proyecto.

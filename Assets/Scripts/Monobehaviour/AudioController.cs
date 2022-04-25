@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioController : MonoBehaviour
@@ -36,6 +34,9 @@ public class AudioController : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.GameState == GameManager.GameStateEnum.GameOver)
+            return;
+        
         if (playSFX)
         {
             playSFX = false;

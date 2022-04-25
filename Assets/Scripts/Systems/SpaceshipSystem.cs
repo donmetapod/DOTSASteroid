@@ -1,16 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Unity.Burst;
-using Unity.Collections;
 using Unity.Entities;
-using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 using Unity.Physics;
 using Unity.Physics.Extensions;
-using Unity.Rendering;
-using UnityEngine.EventSystems;
 
 [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
 public partial class SpaceshipSystem : SystemBase
@@ -22,7 +17,7 @@ public partial class SpaceshipSystem : SystemBase
     {
         
         float deltaTime = Time.fixedDeltaTime;
-        bool leftMouseButtonIsPressed = false;
+        // bool leftMouseButtonIsPressed = false;
         Translation shipTranslation = new Translation();
         Rotation shipRotation = new Rotation();
         Entities
@@ -55,7 +50,6 @@ public partial class SpaceshipSystem : SystemBase
                 bool isLeftKeyPressed = Input.GetKey(inputData.LeftKey);
                 bool isUpKeyPressed = Input.GetKey(inputData.UpKey);
                 bool isDownKeyPressed = Input.GetKey(inputData.DownKey);
-                leftMouseButtonIsPressed = inputData.MouseButtonEventData.buttonData.button == PointerEventData.InputButton.Left;
 
                 ship.Direction.x = Convert.ToInt32(isRightKeyPressed);
                 ship.Direction.x -= Convert.ToInt32(isLeftKeyPressed);
@@ -91,7 +85,7 @@ public partial class SpaceshipSystem : SystemBase
         
 
         // Shoot bullet from pool
-        if (leftMouseButtonIsPressed)
+        if(Input.GetMouseButtonDown(0)) 
         {
             Debug.Log("shoot bullet");
             GameManager.Instance.PlayAudioClipWithName("Shoot");
