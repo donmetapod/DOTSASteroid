@@ -1,11 +1,9 @@
-using System;
-using Unity.Collections;
+using Unity.Collections.LowLevel.Unsafe;
 using Unity.Entities;
-using Unity.Mathematics;
-using UnityEngine;
 
 
 [GenerateAuthoringComponent]
+[NativeContainerSupportsMinMaxWriteRestriction]
 public struct BulletData : IComponentData
 {
     public float Speed;

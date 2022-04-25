@@ -12,4 +12,5 @@ public struct AsteroidData : IComponentData
     public Entity SmallerAsteroid;
     public Entity ExplosionVfx;
     public Translation LastKnownTranslation;
+    public Rotation LastKnownRotation;
 }

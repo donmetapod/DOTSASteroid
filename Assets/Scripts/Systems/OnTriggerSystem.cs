@@ -4,11 +4,21 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using Unity.Physics;
 using Unity.Physics.Systems;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
+// [UpdateAfter(typeof(EndFramePhysicsSystem))]
 public partial class OnTriggerSystem : SystemBase
 {
     private BuildPhysicsWorld buildPhysicsWorld;
     private StepPhysicsWorld stepPhysicsWorld;
+    public static ComponentDataFromEntity<PowerUpData> allPowerUps;
+    public static ComponentDataFromEntity<SpaceshipData> allPlayers;
+    public static ComponentDataFromEntity<AsteroidData> allAsteroids;
+    public static ComponentDataFromEntity<BulletData> allBullets;
+    public static ComponentDataFromEntity<UFOData> allUFOs;
+    // public static ComponentDataFromEntity<Translation> allTranslations;
+
     private EntityQuery entityQuery;
     
     protected override void OnCreate()
@@ -38,17 +48,17 @@ public partial class OnTriggerSystem : SystemBase
             //TODO find a cleaner way to check for triggers
             #region Bullets and Asteroids triggers
             // Bullet entity A collides with asteroid Entity B
-            if (GameReferenceSystem.allBullets.HasComponent(entityA) && GameReferenceSystem.allAsteroids.HasComponent(entityB))
+            if (allBullets.HasComponent(entityA) && allAsteroids.HasComponent(entityB))
             {
                 KillAsteroidEntity(entityCommandBuffer, entityA, entityB);
-            }else if (GameReferenceSystem.allAsteroids.HasComponent(entityA) && GameReferenceSystem.allBullets.HasComponent(entityB)) // Bullet entity B collides with asteroid Entity A
+            }else if (allAsteroids.HasComponent(entityA) && allBullets.HasComponent(entityB)) // Bullet entity B collides with asteroid Entity A
             {
                 KillAsteroidEntity(entityCommandBuffer, entityB, entityA);
             }
             #endregion
 
             #region Player and Asteroids triggers
-            if (GameReferenceSystem.AllPlayers.HasComponent(entityA) && GameReferenceSystem.allAsteroids.HasComponent(entityB))
+            if (allPlayers.HasComponent(entityA) && allAsteroids.HasComponent(entityB))
             {
                 if (!GameManager.Instance.SpaceshipHasShield)
                 {
@@ -64,10 +74,10 @@ public partial class OnTriggerSystem : SystemBase
 
             #region Player and PowerUps triggers
 
-            if (GameReferenceSystem.allPowerUps.HasComponent(entityA) && GameReferenceSystem.AllPlayers.HasComponent(entityB))
+            if (allPowerUps.HasComponent(entityA) && allPlayers.HasComponent(entityB))
             {
                 GetPowerUp(entityA, entityCommandBuffer);
-            }else if (GameReferenceSystem.AllPlayers.HasComponent(entityA) && GameReferenceSystem.allPowerUps.HasComponent(entityB))
+            }else if (allPlayers.HasComponent(entityA) && allPowerUps.HasComponent(entityB))
             {
                 GetPowerUp(entityB, entityCommandBuffer);
             }
@@ -75,20 +85,20 @@ public partial class OnTriggerSystem : SystemBase
             #endregion
 
             #region Bullets and UFO
-            if (GameReferenceSystem.allUFOs.HasComponent(entityA) && GameReferenceSystem.allBullets.HasComponent(entityB))
+            if (allUFOs.HasComponent(entityA) && allBullets.HasComponent(entityB))
             {
                 KillUFO(entityA, entityCommandBuffer, entityB);
-            }else if (GameReferenceSystem.allBullets.HasComponent(entityA) && GameReferenceSystem.allUFOs.HasComponent(entityB))
+            }else if (allBullets.HasComponent(entityA) && allUFOs.HasComponent(entityB))
             {
                 KillUFO(entityB, entityCommandBuffer, entityA);
             }
             #endregion
 
             #region UFO Bullets with spaceship
-            if (GameReferenceSystem.AllPlayers.HasComponent(entityA) && GameReferenceSystem.allBullets.HasComponent(entityB))
+            if (allPlayers.HasComponent(entityA) && allBullets.HasComponent(entityB))
             {
                 LoseLife(entityCommandBuffer, entityA);
-            }else if (GameReferenceSystem.allBullets.HasComponent(entityA) && GameReferenceSystem.AllPlayers.HasComponent(entityB))
+            }else if (allBullets.HasComponent(entityA) && allPlayers.HasComponent(entityB))
             {
                 LoseLife(entityCommandBuffer, entityB);
             }
@@ -96,10 +106,10 @@ public partial class OnTriggerSystem : SystemBase
             #endregion
 
             #region UFO and Spaceship
-            if (GameReferenceSystem.AllPlayers.HasComponent(entityA) && GameReferenceSystem.allUFOs.HasComponent(entityB))
+            if (allPlayers.HasComponent(entityA) && allUFOs.HasComponent(entityB))
             {
                 LoseLife(entityCommandBuffer, entityA);
-            }else if (GameReferenceSystem.allUFOs.HasComponent(entityA) && GameReferenceSystem.AllPlayers.HasComponent(entityB))
+            }else if (allUFOs.HasComponent(entityA) && allPlayers.HasComponent(entityB))
             {
                 LoseLife(entityCommandBuffer, entityB);
             }
@@ -108,13 +118,13 @@ public partial class OnTriggerSystem : SystemBase
 
         private static void KillUFO(Entity entityA, EntityCommandBuffer entityCommandBuffer, Entity entityB)
         {
-            UFOData defaultUFOData = GameReferenceSystem.allUFOs[entityA];
+            UFOData defaultUFOData = allUFOs[entityA];
             UFOData newUFOData = defaultUFOData;
             newUFOData.ResetUFOData = true;
             entityCommandBuffer.SetComponent(entityA, newUFOData);
-            Entity vfxFClone = entityCommandBuffer.Instantiate(GameReferenceSystem.allUFOs[entityA].DamageVFX);
+            Entity vfxFClone = entityCommandBuffer.Instantiate(allUFOs[entityA].DamageVFX);
             Translation position = new Translation();
-            position.Value = GameReferenceSystem.allUFOs[entityA].LastKnownTranslation.Value;
+            position.Value = allUFOs[entityA].LastKnownTranslation.Value;
             entityCommandBuffer.SetComponent(vfxFClone, position);
             position.Value = new float3(50, 50, 50);
             entityCommandBuffer.SetComponent(entityB, position); //Moves bullet outside the screen
@@ -124,7 +134,7 @@ public partial class OnTriggerSystem : SystemBase
         private static void GetPowerUp(Entity entityA, EntityCommandBuffer entityCommandBuffer)
         {
             // Get power up type
-            if (GameReferenceSystem.allPowerUps[entityA].PowerUpType == PowerUpData.PowerUpTypeEnum.Shield)
+            if (allPowerUps[entityA].PowerUpType == PowerUpData.PowerUpTypeEnum.Shield)
             {
                 GameManager.Instance.SpaceshipHasShield = true;
             }
@@ -140,8 +150,8 @@ public partial class OnTriggerSystem : SystemBase
         {
             if (!GameManager.Instance.PlayerRespawning)
             {
-                Entity explosionClone = entityCommandBuffer.Instantiate(GameReferenceSystem.AllPlayers[playerEntity].DestroyVfx);
-                Translation position = GameReferenceSystem.AllPlayers[playerEntity].LastKnowPosition;
+                Entity explosionClone = entityCommandBuffer.Instantiate(allPlayers[playerEntity].DestroyVfx);
+                Translation position = allPlayers[playerEntity].LastKnowPosition;
                 entityCommandBuffer.SetComponent(explosionClone, position);
                 GameManager.Instance.PlayerRespawning = true;
                 GameManager.Instance.PlayerLives--;
@@ -160,7 +170,7 @@ public partial class OnTriggerSystem : SystemBase
             defaultBulletTranslation.Value = new float3(100, 100, 100);
             entityCommandBuffer.SetComponent(attackerEntity, defaultBulletTranslation);
 
-            AsteroidData destroyedAsteroidData = GameReferenceSystem.allAsteroids[damagedEntity];
+            AsteroidData destroyedAsteroidData = allAsteroids[damagedEntity];
             if (!destroyedAsteroidData.IsSmallAsteroid)
             {
                 // Create two small asteroids when a big one is destroyed
@@ -174,7 +184,7 @@ public partial class OnTriggerSystem : SystemBase
                 }
             }
 
-            Entity explosionVFX = entityCommandBuffer.Instantiate(GameReferenceSystem.allAsteroids[damagedEntity].ExplosionVfx);
+            Entity explosionVFX = entityCommandBuffer.Instantiate(allAsteroids[damagedEntity].ExplosionVfx);
             Translation position = new Translation
             {
                 Value = destroyedAsteroidData.LastKnownTranslation.Value
@@ -193,6 +203,13 @@ public partial class OnTriggerSystem : SystemBase
     
     protected override void OnUpdate()
     {
+        allPowerUps = GetComponentDataFromEntity<PowerUpData>(true);
+        allPlayers = GetComponentDataFromEntity<SpaceshipData>(true);
+        allAsteroids = GetComponentDataFromEntity<AsteroidData>();
+        allUFOs = GetComponentDataFromEntity<UFOData>(true);
+        allBullets = GetComponentDataFromEntity<BulletData>(true);
+        // allTranslations = GetComponentDataFromEntity<Translation>();
+        
         Dependency.Complete();
     
         NativeList<TriggerEvent> triggerEvents = new NativeList<TriggerEvent>(Allocator.TempJob);
@@ -206,7 +223,7 @@ public partial class OnTriggerSystem : SystemBase
         handle.Complete();
     
         var physicsWorld = buildPhysicsWorld.PhysicsWorld;
-        // int expectedNumberOfTriggerEvents = 0;
+        int expectedNumberOfTriggerEvents = 0;
         
         Entities
             .WithReadOnly(physicsWorld)
@@ -238,7 +255,18 @@ public partial class OnTriggerSystem : SystemBase
     
                 RigidBody nonTriggerBody = physicsWorld.Bodies[nonTriggerBodyIndex];
                 RigidBody triggerBody = physicsWorld.Bodies[triggerBodyIndex];
-
+    
+                // bool isTrigger = false;
+                // unsafe
+                // {
+                //     ConvexCollider* colliderPtr = (ConvexCollider*)triggerBody.Collider.GetUnsafePtr();
+                //     var material = colliderPtr->Material;
+                //
+                //     isTrigger = colliderPtr->Material.CollisionResponse == CollisionResponsePolicy.RaiseTriggerEvents;
+                // }
+                //
+                // float distance = math.distance(triggerBody.WorldFromBody.pos, nonTriggerBody.WorldFromBody.pos);
+                
             }).Run();
 
         triggerEvents.Dispose();

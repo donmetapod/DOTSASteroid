@@ -31,6 +31,7 @@ public partial class AsteroidMovementSystem : SystemBase
             // Move the asteroids
             translation.Value += asteroidData.MoveDirection * deltaTime * asteroidData.MovementSpeed;
             asteroidData.LastKnownTranslation = translation;
+            asteroidData.LastKnownRotation = rotation;
         }).Run();
     }
 }
